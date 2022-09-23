@@ -140,9 +140,10 @@ tar -xf test_images/lite_data.tar
 
 
 ### 3.3 准备模型
-
-您可以在[百度网盘](链接：https://pan.baidu.com/s/1bWG8UNK_GA9UxXkZ4RD7XA)下载预训练模型，提取码：n5ea。下载模型文件后，将config.yaml中的checkpoint改为模型文件的前缀名。
-
+预训练模型：
+您可以在[百度网盘](https://pan.baidu.com/s/1bWG8UNK_GA9UxXkZ4RD7XA)下载预训练模型，提取码：n5ea。下载模型文件后，将config.yaml中的checkpoint改为模型文件的前缀名。
+inference模型：
+[前往百度网盘直接下载](https://pan.baidu.com/s/1Jjfw7cSz9NRbGmINO2k1wg)(提取码：ipz9)
 
 ## 4. 开始使用
 
@@ -204,14 +205,34 @@ init tensorboard
 ```
 
 ### 4.3 模型预测
-
-
-在这里简单说明一下预测的命令，需要提供原始图像、文本等内容，在文档中体现输出结果。
+简单的预测命令如下：
+```
+python tools/predict.py --pretrained your_model_path --img_path your_img_path --config_file your_config_file --word_path your_word_path
+```
+其中--pretrained写入预测所需模型文件夹路径，--img_path需要提供预测图片路径，--config_file需要提供配置文件路径,--word_path需要提供词表路径。如果出现infer_model无法引入的情况，可以将predict.py移出tools文件夹，将命令更改为：
+```
+python predict.py --pretrained your_model_path --img_path your_img_path --config_file your_config_file --word_path your_word_path
+```
+输出结果格式如下所示:
+```
+共 111 类符号。
+seq_prob: \sum _ { n = 1 } ^ { \infty } \frac { \cos \pi n } { n }
 
 
 ## 5. 模型推理部署
 
-如果repo中包含该功能，可以按照Inference推理、Serving服务化部署再细分各个章节，给出具体的使用方法和说明文档。
+
+模型使用inference进行推理部署，简单的推理命令如下：
+```
+python tools/infer.py --model_dir your_model_path --img_path your_img_path --word_path your_word_path
+```
+其中--model_dir写入预测所需模型文件夹路径，--img_path需要提供预测图片路径，--word_path需要提供词表路径。
+输出结果格式如下所示:
+```
+共 111 类符号。
+image_name: ./images/RIT_2014_94.jpeg, result_seq: \sum _ { n = 1 } ^ { \infty } \frac { \cos \pi n } { n }
+```
+
 
 
 ## 6. 自动化测试脚本
@@ -224,3 +245,4 @@ init tensorboard
 本项目的发布受[Apache 2.0 license](./LICENSE)许可认证。
 
 ## 8. 参考链接与文献
+参考文献：[When Counting Meets HMER: Counting-Aware Network for Handwritten Mathematical Expression Recognition](https://arxiv.org/pdf/2207.11463.pdf)
