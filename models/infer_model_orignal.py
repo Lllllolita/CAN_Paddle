@@ -5,12 +5,10 @@ import paddle.nn as nn
 import paddle.nn.functional as F
 import math
 
-from can_paddle.models.densenet import DenseNet
-from can_paddle.models.attention import Attention
-from can_paddle.models.decoder import PositionEmbeddingSine
-from can_paddle.models.counting import CountingDecoder as counting_decoder
-from counting_utils import gen_counting_label
-from utils import draw_attention_map, draw_counting_map
+from models.densenet import DenseNet
+from models.attention import Attention
+from models.decoder import PositionEmbeddingSine
+from models.counting import CountingDecoder as counting_decoder
 
 # 模型推理的时候用的
 class Inference(nn.Layer):
