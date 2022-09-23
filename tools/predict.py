@@ -10,7 +10,7 @@ import sys
 import numpy as np
 # from PIL import Image
 import cv2
-from can_paddle.models.infer_model_orignal import Inference as infer_paddle
+from models.infer_model import Inference as infer_paddle
 from utils import load_config
 from reprod_log import ReprodLogger
 from dataset import  Words
