@@ -1,0 +1,1 @@
+from can_ref.models.decoder import AttDecoder

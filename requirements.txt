@@ -1,0 +1,6 @@
+paddlepaddle==2.3.2
+opencv-python
+matplotlib
+pyaml
+thop
+tqdm
