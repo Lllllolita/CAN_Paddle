@@ -204,6 +204,7 @@ init tensorboard
 ```
 
 ### 4.3 模型预测
+预测预训练模型可以通过模型准备的百度网盘的连接进行下载，预测样例图片在test_images的test_expamples里，词表文件为test_images的word-dict.txt
 
 简单的预测命令如下：
 ```
