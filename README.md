@@ -18,7 +18,6 @@
     
 - [5. 模型推理部署]()
     - [5.1 基于Inference的推理]()
-    - [5.2 基于Serving的服务化部署]()
     
 - [6. 自动化测试脚本]()
 
@@ -245,3 +244,4 @@ image_name: ./images/RIT_2014_94.jpeg, result_seq: \sum _ { n = 1 } ^ { \infty }
 本项目的发布受[Apache 2.0 license](./LICENSE)许可认证。
 
 ## 8. 参考链接与文献
+[When Counting Meets HMER: Counting-Aware Network for Handwritten Mathematical Expression Recognition](https://arxiv.org/abs/2207.11463)
