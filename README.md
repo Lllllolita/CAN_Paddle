@@ -141,7 +141,7 @@ tar -xf test_images/lite_data.tar
 
 ### 3.3 准备模型
 
-预训练模型：您可以在[百度网盘](https://pan.baidu.com/s/1bWG8UNK_GA9UxXkZ4RD7XA)下载预训练模型，提取码：n5ea。下载模型文件后，将config.yaml中的checkpoint改为模型文件的前缀名。<br>
+预训练模型：您可以在[百度网盘](https://pan.baidu.com/s/1bWG8UNK_GA9UxXkZ4RD7XA)下载预训练模型，提取码：n5ea。<br>下载模型文件后，将config.yaml中的checkpoint改为模型文件的前缀名。<br>
 inference模型：[前往百度网盘直接下载](https://pan.baidu.com/s/1Jjfw7cSz9NRbGmINO2k1wg)(提取码：ipz9)
 
 ## 4. 开始使用
@@ -204,13 +204,13 @@ init tensorboard
 ```
 
 ### 4.3 模型预测
-预测预训练模型可以通过模型准备的百度网盘的连接进行下载，预测样例图片在test_images的test_expamples里，词表文件为test_images的word-dict.txt
+预测预训练模型可以通过模型准备的百度网盘的连接进行下载，预测样例图片在test_images的test_expamples里，词表文件为test_images的word-dict.txt。
 
 简单的预测命令如下：
 ```
 python tools/predict.py --pretrained your_model_path --img_path your_img_path --config_file your_config_file --word_path your_word_path
 ```
-其中--pretrained写入预测所需模型文件夹路径，--img_path需要提供预测图片路径，--config_file需要提供配置文件路径,--word_path需要提供词表路径。如果出现infer_model无法引入的情况，可以将predict.py移出tools文件夹，将命令更改为：
+其中,--pretrained写入预测所需模型文件夹路径，--img_path需要提供预测图片路径，--config_file需要提供配置文件路径,--word_path需要提供词表路径。如果出现infer_model无法引入的情况，可以将predict.py移出tools文件夹，将命令更改为：
 ```
 python predict.py --pretrained your_model_path --img_path your_img_path --config_file your_config_file --word_path your_word_path
 ```
@@ -227,7 +227,7 @@ seq_prob: \sum _ { n = 1 } ^ { \infty } \frac { \cos \pi n } { n }
 ```
 python tools/infer.py --model_dir your_model_path --img_path your_img_path --word_path your_word_path
 ```
-其中--model_dir写入预测所需模型文件夹路径，--img_path需要提供预测图片路径，--word_path需要提供词表路径。
+其中,--model_dir写入预测所需模型文件夹路径，--img_path需要提供预测图片路径，--word_path需要提供词表路径。
 输出结果格式如下所示:
 ```
 共 111 类符号。
