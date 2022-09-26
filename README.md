@@ -211,7 +211,7 @@ export PYTHONPATH=$PYTHONPATH:/home/a/CAN
 
 简单的预测命令如下：
 ```
-python tools/predict.py --pretrained your_model_path --img_path your_img_path --config_file your_config_file --word_path your_word_path
+python tools/predict.py --pretrained your_model_path --device ('cpu' or 'gpu') --img_path your_img_path --config_file your_config_file --word_path your_word_path
 ```
 
 输出结果格式如下所示:
