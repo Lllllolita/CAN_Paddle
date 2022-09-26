@@ -91,7 +91,7 @@ Counting-Aware Network（CAN）是2022年ECCV会议收录的手写数学公式�
 
 | 模型      | 参考精度 | 复现精度 | 下载链接 |
 |:---------:|:------:|:----------:|:----------:|
-| CAN | 57.00 | 51.72   | [预训练模型](https://pan.baidu.com/s/1bWG8UNK_GA9UxXkZ4RD7XA) 提取码：n5ea\  [Inference模型](https://pan.baidu.com/s/1Jjfw7cSz9NRbGmINO2k1wg) 提取码：ipz9
+| CAN | 57.00 | 51.72   | [预训练模型](https://pan.baidu.com/s/1bWG8UNK_GA9UxXkZ4RD7XA) 提取码：n5ea\  [Inference模型](https://pan.baidu.com/s/1Jjfw7cSz9NRbGmINO2k1wg) 提取码：ipz9\ [日志](https://pan.baidu.com/s/18G-dXlU3b1ja014wQiqlag) 提取码：ohu2
 
 ## 3. 准备数据与环境
 
