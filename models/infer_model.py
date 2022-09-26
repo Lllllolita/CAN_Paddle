@@ -153,4 +153,3 @@ class AttDecoder(nn.Layer):
 decoder_dict = {
     'AttDecoder': AttDecoder
 }
-Footer

@@ -11,29 +11,26 @@ import numpy as np
 # from PIL import Image
 import cv2
 from models.infer_model import Inference as infer_paddle
-from utils import load_config
+from utils.util import load_config
 from reprod_log import ReprodLogger
-from dataset import  Words
+from paddlevision.datasets.dataset import Words
 
 __dir__ = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.abspath(os.path.join(__dir__, '../')))
-
-
-
 
 
 def get_args(add_help=True):
     import argparse
     parser = argparse.ArgumentParser(
         description='PaddlePaddle Classification Training', add_help=add_help)
-    parser.add_argument('--pretrained', default="./processes/CAN_2022-09-04-00-17_decoder-AttDecoder_WordRate-0.8935_ExpRate-0.5314_148(1).pdparams", help='pretrained model')
-    parser.add_argument('--device', default='gpu', help='device')
+    parser.add_argument('--pretrained', default="./CAN_2022-09-12-21-24_decoder-AttDecoder_WordRate-0.9166_ExpRate-0.5172_201.pdparams", help='pretrained model')
+    parser.add_argument('--device', default='cpu', help='device')
     # parser.add_argument('--resize-size', default=224, help='resize_size')
     # parser.add_argument('--crop-size', default=256, help='crop_szie')
-    parser.add_argument('--img_path', default='./processes/images/RIT_2014_94.jpeg', help='path where to save')
+    parser.add_argument('--img_path', default='./test_images/RIT_2014_94.jpeg', help='path where to save')
     parser.add_argument('--is_model_key', default=False, help='is_model_key')
     parser.add_argument('--config_file', default="./config.yaml", help='config_file')
-    parser.add_argument("--word_path",default="./datasets/CROHME/words_dict.txt",type=str,help="word_dict")
+    parser.add_argument("--word_path",default="./paddlevision/datasets/CROHME/words_dict.txt",type=str,help="word_dict")
     # parser.add_argument('--num-classes', default=1000, help='num_classes')
     args = parser.parse_args()
     return args
