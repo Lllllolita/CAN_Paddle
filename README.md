@@ -90,12 +90,12 @@ Counting-Aware Network（CAN）是2022年ECCV会议收录的手写数学公式�
 格式如下：
 
 - 数据集大小：CROHME共包含8884个样本(其中训练样本8835），识别序列由111类符号组成。
-- 数据集下载链接：[前往百度网盘直接下载](https://pan.baidu.com/share/init?surl=qUVQLZh5aPT6d7-m6il6Rg)（提取码1234）
+- 数据集下载链接：[前往百度网盘直接下载](https://pan.baidu.com/share/init?surl=qUVQLZh5aPT6d7-m6il6Rg)
 - 数据格式：图像数据存在pkl文件中，符号序列存在txt文本中，请根据对应文件读取方法进行读取。
 
 | 模型      | 参考精度 | 复现精度 | 下载链接 |
 |:---------:|:------:|:----------:|:----------:|
-| CAN | - | -   | [预训练模型](https://paddle-model-ecology.bj.bcebos.com/model/alexnet_reprod/alexnet_pretrained.pdparams) \|  [Inference模型](https://paddle-model-ecology.bj.bcebos.com/model/alexnet_reprod/alexnet_infer.tar) \| [日志](https://paddle-model-ecology.bj.bcebos.com/model/alexnet_reprod/alexnet_train.log) |
+| CAN | 57.00 | 51.72   | [预训练模型](https://pan.baidu.com/s/1bWG8UNK_GA9UxXkZ4RD7XA) 提取码：n5ea\  [Inference模型](https://pan.baidu.com/s/1Jjfw7cSz9NRbGmINO2k1wg) 提取码：ipz9
 
 ## 3. 准备数据与环境
 
