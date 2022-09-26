@@ -40,10 +40,6 @@ Counting-Aware Network（CAN）是2022年ECCV会议收录的手写数学公式�
 
 **参考repo:** [https://github.com/LBH1024/CAN](https://github.com/LBH1024/CAN)
 
-在此非常感谢`$参考repo的 github id$`等人贡献的[repo name](url)，提高了本repo复现论文的效率。
-
-**aistudio体验教程:** [地址](url)
-
 
 **目录说明**
 ```
