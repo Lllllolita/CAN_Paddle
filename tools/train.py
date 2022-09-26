@@ -132,7 +132,7 @@ if paddle.distributed.get_world_size() > 1:
 
 # 进入评估模式
 if args.test_only and paddle.distributed.get_rank() == 0:
-    load_checkpoint(model, optimizer, params['checkpoint'])
+    load_checkpoint(model, None, params['checkpoint'])
     eval_loss, eval_word_score, eval_exprate = evaluate(model, criterion, 0, eval_loader, writer=writer)
     print(f'Epoch: 0 loss: {eval_loss:.4f} word score: {eval_word_score:.4f} ExpRate: {eval_exprate:.4f}')
     exit(0)
