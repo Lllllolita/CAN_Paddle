@@ -176,8 +176,6 @@ Start training
 
 ### 4.2 模型评估
 
-简单说明一下评估的命令以及结果，建议附一些简短的评估日志。
-
 评估文件在tools文件夹的train.py，由于代码中的路径均使用与CAN文件夹的相对路径形式表示，因此需要先将CAN文件夹指定为python的环境变量，设置为搜索路径的根路径。
 进入CAN文件夹，假设文件夹的绝对路径为/home/a/CAN
 ```
@@ -203,16 +201,19 @@ init tensorboard
 ```
 
 ### 4.3 模型预测
+
+预测文件在tools文件夹的predict.py，由于代码中的路径均使用与CAN文件夹的相对路径形式表示，因此需要先将CAN文件夹指定为python的环境变量，设置为搜索路径的根路径。
+进入CAN文件夹，假设文件夹的绝对路径为/home/a/CAN
+```
+export PYTHONPATH=$PYTHONPATH:/home/a/CAN
+```
 预测预训练模型可以通过模型准备的百度网盘的连接进行下载，预测样例图片在test_images的test_expamples里，词表文件为test_images的word-dict.txt。
 
 简单的预测命令如下：
 ```
 python tools/predict.py --pretrained your_model_path --img_path your_img_path --config_file your_config_file --word_path your_word_path
 ```
-其中,--pretrained写入预测所需模型文件夹路径，--img_path需要提供预测图片路径，--config_file需要提供配置文件路径,--word_path需要提供词表路径。如果出现infer_model无法引入的情况，可以将predict.py移出tools文件夹，将命令更改为：
-```
-python predict.py --pretrained your_model_path --img_path your_img_path --config_file your_config_file --word_path your_word_path
-```
+
 输出结果格式如下所示:
 ```
 共 111 类符号。
@@ -221,6 +222,11 @@ seq_prob: \sum _ { n = 1 } ^ { \infty } \frac { \cos \pi n } { n }
 
 
 ## 5. 模型推理部署
+推理文件在tools文件夹的infer.py，由于代码中的路径均使用与CAN文件夹的相对路径形式表示，因此需要先将CAN文件夹指定为python的环境变量，设置为搜索路径的根路径。
+进入CAN文件夹，假设文件夹的绝对路径为/home/a/CAN
+```
+export PYTHONPATH=$PYTHONPATH:/home/a/CAN
+```
 
 模型使用inference进行推理部署，简单的推理命令如下：
 ```
