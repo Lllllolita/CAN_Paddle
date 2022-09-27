@@ -59,7 +59,7 @@ Counting-Aware Network（CAN）是2022年ECCV会议收录的手写数学公式�
             torch2paddle.py      # 权重转换函数（torch权重转换为paddle）
             utilities.py         # 常用方法
         --result                 # 对齐结果
-        README.md
+        README.md		 # 对齐相关说明
     --checkpoints                # 存放训练保存的模型文件
     --images                     # 存放仓库显示图片
     --logs                       # 存放tensorboard日志
@@ -83,6 +83,8 @@ Counting-Aware Network（CAN）是2022年ECCV会议收录的手写数学公式�
         --export.py              # 导出静态模型主函数
         --predict.py             # 预测主函数
     --utils                      # 通用工具函数
+    config.yaml			 # 训练、评估、模型使用等相关参数配置
+    requirements.txt		 # 项目所需相关Python工具包
 ```
 
 ## 2. 数据集和复现精度
