@@ -238,9 +238,10 @@ tensorboard保存的日志.tfevents文件位于logs文件夹内。
 ```
 export PYTHONPATH=$PYTHONPATH:/home/a/CAN_Paddle
 ```
-预测预训练模型可以通过模型准备的百度网盘的连接进行下载，下载完的模型放在test_model文件夹里,并更名为predict.pdparams，预测样例图片在test_images的test_expamples里。
+预测预训练模型可以通过模型准备的百度网盘的链接进行下载，下载完的模型放在test_model文件夹里,并更名为predict.pdparams，预测样例图片在test_images的test_expamples里。
 
 简单的预测命令如下：
+
 （1）使用cpu进行预测：
 ```
 python tools/predict.py 
@@ -249,7 +250,7 @@ python tools/predict.py
 ```
 python tools/predict.py --device 'gpu'
 ```
-其中，使用gpu预测时，默认使用'gpu:0'进行预测，如果不是'gpu:0'请重新指定全局gpu设备为'gpu:0'。<br>
+其中，使用gpu预测时，默认使用'gpu:0'进行预测，如果不是'gpu:0'请重新指定全局gpu设备为'gpu:0'。
 
 可以使用以下命令更换预测使用的模型和预测图片：
 ```
@@ -290,8 +291,10 @@ TensorBoard 2.5.0 at http://localhost:6006/ (Press CTRL+C to quit)
 export PYTHONPATH=$PYTHONPATH:/home/a/CAN_Paddle
 ```
 
-模型使用inference进行推理部署，inference模型可以通过模型准备的百度网盘的连接进行下载，下载完的模型放在test_model文件夹里，预测样例图片在test_images的test_expamples里。
+模型使用inference进行推理部署，inference模型可以通过模型准备的百度网盘的链接进行下载，下载完的模型（包括pdparams，pdparams.info，pdmodel文件）放在test_model文件夹里，要把inference和inference_faster文件全部下载下来，预测样例图片在test_images的test_expamples里。
+
 简单的推理命令如下：
+
 （1）使用cpu进行推理：
 ```
 python tools/infer.py 
@@ -300,11 +303,13 @@ python tools/infer.py
 ```
 python tools/infer.py --use_gpu True
 ```
-可以使用以下命令更换推理使用的模型和预测图片：
+本项目准备了inference和inference_faster这两个模型，默认使用inference_faster这个模型，inference_faster主要识别序列较短的模型推理速度快于infernce,inference模型可以识别测试集中所有长度的序列，但是推理速度较慢。可以使用以下命令更换推理使用的模型和预测图片：
+
 ```
-python tools/infer.py --model_dir your_model_path --img_path your_img_path 
+python tools/infer.py  --img_path your_img_path --if_fast (True or False)
 ```
-其中,--model_dir写入推理所需模型文件夹路径，--img_path需要提供推理图片路径。<br>
+其中,--img_path需要提供推理图片路径,--if_fast 设置为True则使用inference_faster模型，False则使用inference模型。
+
 输出结果格式如下所示:
 ```
 共 111 类符号。
