@@ -166,6 +166,7 @@ tar -xf test_images/lite_data.tar
 checkpoint: "CAN_123"
 ```
 预测模型：您可以在[百度网盘](https://pan.baidu.com/s/1aUKUAWzRMbnDYxjHGRD_ZA)下载预测模型，提取码：em1l。
+
 inference模型：您可以在[百度网盘](https://pan.baidu.com/s/1Jjfw7cSz9NRbGmINO2k1wg)下载inference模型，提取码：ipz9。
 
 训练、验证日志：您可以在[百度网盘](https://pan.baidu.com/s/1prO4DRLq2T99cDvdSGTumQ)下载tensorboard日志（.tfevents文件），提取码：p6he。下载日志后，将logs文件夹放置于CAN_Paddle根目录（替换repo中的logs文件夹）。
