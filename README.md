@@ -84,7 +84,7 @@ Counting-Aware Network（CAN）是2022年ECCV会议收录的手写数学公式�
         --predict.py             # 预测主函数
     --utils                      # 通用工具函数
     config.yaml			 # 训练、评估、模型使用等相关参数配置
-    requirements.txt		 # 项目所需相关Python工具包
+    requirements.txt		 # 项目所需相关python工具包
 ```
 
 ## 2. 数据集和复现精度
@@ -102,8 +102,10 @@ Counting-Aware Network（CAN）是2022年ECCV会议收录的手写数学公式�
 | CAN | 57.00 | 51.72   | [预训练模型](https://pan.baidu.com/s/1bWG8UNK_GA9UxXkZ4RD7XA) 提取码：n5ea    [Inference模型](https://pan.baidu.com/s/1Jjfw7cSz9NRbGmINO2k1wg) 提取码：ipz9    [日志](https://pan.baidu.com/s/18G-dXlU3b1ja014wQiqlag) 提取码：ohu2
 
 参考repo使用Adadelta优化器训练模型，由于torch和paddle对于Adadelta的底层实现存在差异，使用paddle的Adadelta训练模型难以实现参考精度，并且学习过程出现困难，训练多次震荡。具体实验分析，见实验报告.docx。
+
 因此，本repo使用Adadelta和SGD两种优化器训练模型，并与参考repo使用SGD优化器训练的结果进行对比。最终结果表明，同样使用SGD训练，基于相同的参数初始化方式、固定随机种子、使用相同的训练参数调整策略，paddle优于torch精度，二者相差0.61%。
-可在config.yaml中，修改优化器为Adadelta/SGD予以验证。
+
+repo默认设置为基于SGD训练，可在[config.yaml](https://github.com/Lllllolita/CAN_Paddle/blob/master/config.yaml)中，修改optimizer为Adadelta，以进行验证。
 
 ## 3. 准备数据与环境
 
@@ -147,7 +149,7 @@ tar -xf test_images/lite_data.tar
 
 ### 3.3 准备模型
 
-预训练模型：您可以在[百度网盘](https://pan.baidu.com/s/1bWG8UNK_GA9UxXkZ4RD7XA)下载预训练模型，提取码：n5ea。下载模型文件后，将config.yaml中的checkpoint改为模型文件的前缀名。
+预训练模型：您可以在[百度网盘](https://pan.baidu.com/s/1bWG8UNK_GA9UxXkZ4RD7XA)下载预训练模型，提取码：n5ea。下载模型文件后，将[config.yaml](https://github.com/Lllllolita/CAN_Paddle/blob/master/config.yaml)中的checkpoint改为模型文件的前缀名。
 进入config.yaml，假设模型文件名为CAN_123.pdparams
 ```
 checkpoint: "CAN_123"
