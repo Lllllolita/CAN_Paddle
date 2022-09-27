@@ -59,24 +59,29 @@ Counting-Aware Network（CAN）是2022年ECCV会议收录的手写数学公式�
             torch2paddle.py      # 权重转换函数（torch权重转换为paddle）
             utilities.py         # 常用方法
         --result                 # 对齐结果
-	--images
-    --logs
+        README.md
+	--images                     # 存放仓库显示图片
+    --logs                       # 存放tensorboard日志
     --models                     # 模型定义
-    --paddlevision               # 数据集加载等相关工具函数
+    --paddlevision               # 数据集加载、优化器等工具函数
+        --datasets               # 数据集加载相关工具函数，数据集存放文件夹
+        --metrics                # 损失标准化函数
+        --optimizer              # 优化器、学习率相关工具函数
 	--scripts
         --train.sh
         --eval.sh
         --infer.sh
         --export.sh
-	--test_images
+	--test_images                # 存放小数据集
 	    --lite_data.tar
 	--test_tipc
-    --tools
-        --train.py
-        --eval.py
-        --infer.py
-        --export.py
-    --utils 
+    --tools                      # 训练、评估、预测、推理等函数
+        --train.py               # 训练、评估主函数
+        --eval.py                # 训练、评估功能函数
+        --infer.py               # 推理主函数
+        --export.py              # 导出静态模型主函数
+        --predict.py             # 预测主函数
+    --utils                      # 通用工具函数
 ```
 
 ## 2. 数据集和复现精度
@@ -94,7 +99,6 @@ Counting-Aware Network（CAN）是2022年ECCV会议收录的手写数学公式�
 | CAN | 57.00 | 51.72   | [预训练模型](https://pan.baidu.com/s/1bWG8UNK_GA9UxXkZ4RD7XA) 提取码：n5ea\  [Inference模型](https://pan.baidu.com/s/1Jjfw7cSz9NRbGmINO2k1wg) 提取码：ipz9\ [日志](https://pan.baidu.com/s/18G-dXlU3b1ja014wQiqlag) 提取码：ohu2
 
 ## 3. 准备数据与环境
-
 
 ### 3.1 准备环境
 
@@ -136,7 +140,11 @@ tar -xf test_images/lite_data.tar
 
 ### 3.3 准备模型
 
-预训练模型：您可以在[百度网盘](https://pan.baidu.com/s/1bWG8UNK_GA9UxXkZ4RD7XA)下载预训练模型，提取码：n5ea。<br>下载模型文件后，将config.yaml中的checkpoint改为模型文件的前缀名。<br>
+预训练模型：您可以在[百度网盘](https://pan.baidu.com/s/1bWG8UNK_GA9UxXkZ4RD7XA)下载预训练模型，提取码：n5ea。下载模型文件后，将config.yaml中的checkpoint改为模型文件的前缀名。
+进入config.yaml，假设模型文件名为CAN_123.pdparams
+```
+checkpoint: "CAN_123"
+```
 inference模型：您可以在[百度网盘](https://pan.baidu.com/s/1Jjfw7cSz9NRbGmINO2k1wg)下载inference模型，提取码：ipz9。
 
 ## 4. 开始使用
@@ -168,7 +176,7 @@ Start training
 [Epoch 1, iter: 2] wordRate: 0.05784, expRate: 0.00000, lr: 0.00002, loss: 1293.39844, avg_reader_cost: 0.00120 sec, avg_batch_cost: 0.69045 sec, avg_samples: 8.0, avg_ips: 11.58666 images/sec.
 [Epoch 1, iter: 3] wordRate: 0.04320, expRate: 0.00000, lr: 0.00003, loss: 500.51590, avg_reader_cost: 0.00118 sec, avg_batch_cost: 0.85754 sec, avg_samples: 8.0, avg_ips: 9.32896 images/sec.
 ```
-超参数设置于config.yaml，包括初始学习率、批大小等。
+超参数设置于config.yaml，包括初始学习率、批大小、学习率调参相关设置等。
 
 ### 4.2 模型评估
 
