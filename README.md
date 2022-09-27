@@ -99,7 +99,11 @@ Counting-Aware Network（CAN）是2022年ECCV会议收录的手写数学公式�
 
 | 模型      | 参考精度 | 复现精度 | 下载链接 |
 |:---------:|:------:|:----------:|:----------:|
-| CAN | 57.00 | 51.72   | [预训练模型](https://pan.baidu.com/s/1bWG8UNK_GA9UxXkZ4RD7XA) 提取码：n5ea  [Inference模型](https://pan.baidu.com/s/1Jjfw7cSz9NRbGmINO2k1wg) 提取码：ipz9  [日志](https://pan.baidu.com/s/18G-dXlU3b1ja014wQiqlag) 提取码：ohu2
+| CAN | 57.00 | 51.72   | [预训练模型](https://pan.baidu.com/s/1bWG8UNK_GA9UxXkZ4RD7XA) 提取码：n5ea    [Inference模型](https://pan.baidu.com/s/1Jjfw7cSz9NRbGmINO2k1wg) 提取码：ipz9    [日志](https://pan.baidu.com/s/18G-dXlU3b1ja014wQiqlag) 提取码：ohu2
+
+参考repo使用Adadelta优化器训练模型，由于torch和paddle对于Adadelta的底层实现存在差异，使用paddle的Adadelta训练模型难以实现参考精度，并且学习过程出现困难，训练多次震荡。具体实验分析，见实验报告.docx。
+因此，本repo使用Adadelta和SGD两种优化器训练模型，并与参考repo使用SGD优化器训练的结果进行对比。最终结果表明，同样使用SGD训练，基于相同的参数初始化方式、固定随机种子、使用相同的训练参数调整策略，paddle优于torch精度，二者相差0.61%。
+可在config.yaml中，修改优化器为Adadelta/SGD予以验证。
 
 ## 3. 准备数据与环境
 
