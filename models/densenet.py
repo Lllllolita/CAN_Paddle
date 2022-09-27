@@ -7,7 +7,8 @@ import paddle.nn.functional as F
    growthRate: 24
    reduction: 0.5
    bottleneck: True
-   use_dropout: True'''
+   use_dropout: True
+'''
 
 # DenseNet-B
 class Bottleneck(nn.Layer):
@@ -15,19 +16,28 @@ class Bottleneck(nn.Layer):
         super(Bottleneck, self).__init__()
         interChannels = 4 * growthRate
         self.bn1 = nn.BatchNorm2D(interChannels)
-        w_attr_1, b_attr_1 = self._init_weights()
-        self.conv1 = nn.Conv2D(nChannels, interChannels, kernel_size=1, weight_attr = w_attr_1, bias_attr=None)
+        # 使用kaiming初始化
+        # w_attr_1, b_attr_1 = self._init_weights()
+        # self.conv1 = nn.Conv2D(nChannels, interChannels, kernel_size=1, weight_attr = w_attr_1, bias_attr=None)
+        # 使用Xavier初始化
+        self.conv1 = nn.Conv2D(nChannels, interChannels, kernel_size=1, bias_attr=None)
         self.bn2 = nn.BatchNorm2D(growthRate)
-        w_attr_2, b_attr_2 = self._init_weights()
-        self.conv2 = nn.Conv2D(interChannels, growthRate, kernel_size=3, padding=1, weight_attr = w_attr_2, bias_attr=None)
+
+        # 使用kaiming初始化
+        # w_attr_2, b_attr_2 = self._init_weights()
+        # self.conv2 = nn.Conv2D(interChannels, growthRate, kernel_size=3, padding=1, weight_attr = w_attr_2, bias_attr=None)
+        self.conv2 = nn.Conv2D(interChannels, growthRate, kernel_size=3, padding=1, bias_attr=None)
+        # 使用Xavier初始化
         self.use_dropout = use_dropout
         self.dropout = nn.Dropout(p=0.2)
-    def _init_weights(self):
-        weight_attr = paddle.ParamAttr(
-            initializer = nn.initializer.KaimingUniform())
-        bias_attr = paddle.ParamAttr(
-            initializer = nn.initializer.KaimingUniform())
-        return weight_attr, bias_attr
+
+    # def _init_weights(self):
+    #     weight_attr = paddle.ParamAttr(
+    #         initializer = nn.initializer.KaimingUniform())
+    #     bias_attr = paddle.ParamAttr(
+    #         initializer = nn.initializer.KaimingUniform())
+    #     return weight_attr, bias_attr
+
     def forward(self, x):
         out = F.relu(self.bn1(self.conv1(x)))
         if self.use_dropout:
@@ -44,17 +54,20 @@ class SingleLayer(nn.Layer):
     def __init__(self, nChannels, growthRate, use_dropout):
         super(SingleLayer, self).__init__()
         self.bn1 = nn.BatchNorm2D(nChannels)
-        w_attr_1, b_attr_1 = self._init_weights()
-        self.conv1 = nn.Conv2D(nChannels, growthRate, kernel_size=3, padding=1, weight_attr = w_attr_1, bias_attr=False)
+        # 使用kaiming初始化
+        # w_attr_1, b_attr_1 = self._init_weights()
+        # self.conv1 = nn.Conv2D(nChannels, growthRate, kernel_size=3, padding=1, weight_attr = w_attr_1, bias_attr=False)
+        # 使用Xavier初始化
+        self.conv1 = nn.Conv2D(nChannels, growthRate, kernel_size=3, padding=1, bias_attr=False)
         self.use_dropout = use_dropout
         self.dropout = nn.Dropout(p=0.2)
 
-    def _init_weights(self):
-        weight_attr = paddle.ParamAttr(
-            initializer = nn.initializer.KaimingUniform())
-        bias_attr = paddle.ParamAttr(
-            initializer = nn.initializer.KaimingUniform())
-        return weight_attr, bias_attr
+    # def _init_weights(self):
+    #     weight_attr = paddle.ParamAttr(
+    #         initializer = nn.initializer.KaimingUniform())
+    #     bias_attr = paddle.ParamAttr(
+    #         initializer = nn.initializer.KaimingUniform())
+    #     return weight_attr, bias_attr
 
     def forward(self, x):
         out = self.conv1(F.relu(x))
@@ -70,16 +83,21 @@ class Transition(nn.Layer):
     def __init__(self, nChannels, nOutChannels, use_dropout):
         super(Transition, self).__init__()
         self.bn1 = nn.BatchNorm2D(nOutChannels)
-        w_attr_1, b_attr_1 = self._init_weights()
-        self.conv1 = nn.Conv2D(nChannels, nOutChannels, kernel_size=1, weight_attr = w_attr_1, bias_attr=False)
+        # 使用kaiming初始化
+        # w_attr_1, b_attr_1 = self._init_weights()
+        # self.conv1 = nn.Conv2D(nChannels, nOutChannels, kernel_size=1, weight_attr = w_attr_1, bias_attr=False)
+        # 使用Xavier初始化
+        self.conv1 = nn.Conv2D(nChannels, nOutChannels, kernel_size=1, bias_attr=False)
         self.use_dropout = use_dropout
         self.dropout = nn.Dropout(p=0.2)
-    def _init_weights(self):
-        weight_attr = paddle.ParamAttr(
-            initializer = nn.initializer.KaimingUniform())
-        bias_attr = paddle.ParamAttr(
-            initializer = nn.initializer.KaimingUniform())
-        return weight_attr, bias_attr
+
+    # def _init_weights(self):
+    #     weight_attr = paddle.ParamAttr(
+    #         initializer = nn.initializer.KaimingUniform())
+    #     bias_attr = paddle.ParamAttr(
+    #         initializer = nn.initializer.KaimingUniform())
+    #     return weight_attr, bias_attr
+
     def forward(self, x):
         out = F.relu(self.bn1(self.conv1(x)))
         if self.use_dropout:

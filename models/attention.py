@@ -11,24 +11,42 @@ class Attention(nn.Layer):
         # attention_dim :512
         self.attention_dim = params['attention']['attention_dim']
 
-        w_attr_1, b_attr_1 = self._init_weights()
-        self.hidden_weight = nn.Linear(self.hidden, self.attention_dim, weight_attr = w_attr_1, bias_attr=b_attr_1)
+        # 使用kaiming初始化
+        # w_attr_1, b_attr_1 = self._init_weights()
+        # self.hidden_weight = nn.Linear(self.hidden, self.attention_dim, weight_attr = w_attr_1, bias_attr=b_attr_1)
+
+        # 使用Xavier初始化
+        self.hidden_weight = nn.Linear(self.hidden, self.attention_dim)
+
         # spatial attention
-        w_attr_2, b_attr_2 = self._init_weights()
-        self.attention_conv = nn.Conv2D(1, 512, kernel_size=11, padding=5, weight_attr = w_attr_2, bias_attr=False)
+        # 使用kaiming初始化
+        # w_attr_2, b_attr_2 = self._init_weights()
+        # self.attention_conv = nn.Conv2D(1, 512, kernel_size=11, padding=5, weight_attr = w_attr_2, bias_attr=False)
 
-        w_attr_3, b_attr_3 = self._init_weights()
-        self.attention_weight = nn.Linear(512, self.attention_dim, weight_attr = w_attr_3, bias_attr=False)
+        # 使用Xavier初始化
+        self.attention_conv = nn.Conv2D(1, 512, kernel_size=11, padding=5)
 
-        w_attr_4, b_attr_4 = self._init_weights()
-        self.alpha_convert = nn.Linear(self.attention_dim, 1, weight_attr = w_attr_4, bias_attr=b_attr_4)
+        # 使用kaiming初始化
+        # w_attr_3, b_attr_3 = self._init_weights()
+        # self.attention_weight = nn.Linear(512, self.attention_dim, weight_attr = w_attr_3, bias_attr=False)
 
-    def _init_weights(self):
-        weight_attr = paddle.ParamAttr(
-            initializer = nn.initializer.KaimingUniform())
-        bias_attr = paddle.ParamAttr(
-            initializer = nn.initializer.KaimingUniform())
-        return weight_attr, bias_attr
+        # 使用Xavier初始化
+        self.attention_weight = nn.Linear(512, self.attention_dim)
+
+        # 使用kaiming初始化
+        # w_attr_4, b_attr_4 = self._init_weights()
+        # self.alpha_convert = nn.Linear(self.attention_dim, 1, weight_attr = w_attr_4, bias_attr=b_attr_4)
+
+        # 使用Xavier初始化
+        self.alpha_convert = nn.Linear(self.attention_dim, 1 )
+
+    # 使用Kaiming初始化
+    # def _init_weights(self):
+    #     weight_attr = paddle.ParamAttr(
+    #         initializer = nn.initializer.KaimingUniform())
+    #     bias_attr = paddle.ParamAttr(
+    #         initializer = nn.initializer.KaimingUniform())
+    #     return weight_attr, bias_attr
 
     def forward(self, cnn_features, cnn_features_trans, hidden, alpha_sum, image_mask=None):
         # W_h*h_t:b 256 -> b 512(b attention_dim)

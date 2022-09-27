@@ -42,13 +42,9 @@ class Inference(nn.Layer):
         counting_preds1, _ = self.counting_decoder1(cnn_features, None)
         counting_preds2, _ = self.counting_decoder2(cnn_features, None)
         counting_preds = (counting_preds1 + counting_preds2) / 2
-        
-   
+
         word_probs = self.decoder(cnn_features, counting_preds, is_train=is_train)
 
-    
-
-        
         return word_probs
 
 
@@ -120,8 +116,7 @@ class AttDecoder(nn.Layer):
                 word_out_state = current_state + word_weighted_embedding + word_context_weighted + counting_context_weighted
 
             word_prob = self.word_convert(word_out_state)
-   
-            
+
             #debug改的语句
             # import pdb; pdb.set_trace()
             _, word = paddle.topk(word_prob,k=1,axis=1)

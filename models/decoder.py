@@ -64,8 +64,13 @@ class AttDecoder(nn.Layer):
         paddle.device.set_device(self.device)
 
         # init hidden state
-        w_attr_1, b_attr_1 = self._init_weights()
-        self.init_weight = nn.Linear(self.out_channel, self.hidden_size, weight_attr = w_attr_1, bias_attr=b_attr_1)
+        # 使用Kaiming初始化
+        # w_attr_1, b_attr_1 = self._init_weights()
+        # self.init_weight = nn.Linear(self.out_channel, self.hidden_size, weight_attr = w_attr_1, bias_attr=b_attr_1)
+
+        # 使用Xavier初始化
+        self.init_weight = nn.Linear(self.out_channel, self.hidden_size)
+
         # word embedding
         # word_num , class -> 
         self.embedding = nn.Embedding(self.word_num, self.input_size)
@@ -79,31 +84,44 @@ class AttDecoder(nn.Layer):
         # attention
         self.word_attention = Attention(params)
 
-        w_attr_2, b_attr_2 = self._init_weights()
+        # 使用Kaiming初始化
+        # w_attr_2, b_attr_2 = self._init_weights()
+        # self.encoder_feature_conv = nn.Conv2D(self.out_channel, self.attention_dim,
+        #                                       kernel_size=params['attention']['word_conv_kernel'],
+        #                                       padding=params['attention']['word_conv_kernel']//2,
+        #                                       weight_attr = w_attr_2, bias_attr=b_attr_2)
+        # 使用Xavier初始化
         self.encoder_feature_conv = nn.Conv2D(self.out_channel, self.attention_dim,
                                               kernel_size=params['attention']['word_conv_kernel'],
-                                              padding=params['attention']['word_conv_kernel']//2,
-                                              weight_attr = w_attr_2, bias_attr=b_attr_2)
-        w_attr_3, b_attr_3 = self._init_weights()
-        self.word_state_weight = nn.Linear(self.hidden_size, self.hidden_size, weight_attr = w_attr_3, bias_attr=b_attr_3)
-        w_attr_4, b_attr_4 = self._init_weights()
-        self.word_embedding_weight = nn.Linear(self.input_size, self.hidden_size, weight_attr = w_attr_4, bias_attr=b_attr_4)
-        w_attr_5, b_attr_5 = self._init_weights()
-        self.word_context_weight = nn.Linear(self.out_channel, self.hidden_size, weight_attr = w_attr_5, bias_attr=b_attr_5)
-        w_attr_6, b_attr_6 = self._init_weights()
-        self.counting_context_weight = nn.Linear(self.counting_num, self.hidden_size, weight_attr = w_attr_6, bias_attr=b_attr_6)
-        w_attr_7, b_attr_7 = self._init_weights()
-        self.word_convert = nn.Linear(self.hidden_size, self.word_num, weight_attr = w_attr_7, bias_attr=b_attr_7)
+                                              padding=params['attention']['word_conv_kernel']//2)
+        # 使用Kaiming初始化
+        # w_attr_3, b_attr_3 = self._init_weights()
+        # self.word_state_weight = nn.Linear(self.hidden_size, self.hidden_size, weight_attr = w_attr_3, bias_attr=b_attr_3)
+        # w_attr_4, b_attr_4 = self._init_weights()
+        # self.word_embedding_weight = nn.Linear(self.input_size, self.hidden_size, weight_attr = w_attr_4, bias_attr=b_attr_4)
+        # w_attr_5, b_attr_5 = self._init_weights()
+        # self.word_context_weight = nn.Linear(self.out_channel, self.hidden_size, weight_attr = w_attr_5, bias_attr=b_attr_5)
+        # w_attr_6, b_attr_6 = self._init_weights()
+        # self.counting_context_weight = nn.Linear(self.counting_num, self.hidden_size, weight_attr = w_attr_6, bias_attr=b_attr_6)
+        # w_attr_7, b_attr_7 = self._init_weights()
+        # self.word_convert = nn.Linear(self.hidden_size, self.word_num, weight_attr = w_attr_7, bias_attr=b_attr_7)
+
+        # 使用Xavier初始化
+        self.word_state_weight = nn.Linear(self.hidden_size, self.hidden_size)
+        self.word_embedding_weight = nn.Linear(self.input_size, self.hidden_size)
+        self.word_context_weight = nn.Linear(self.out_channel, self.hidden_size)
+        self.counting_context_weight = nn.Linear(self.counting_num, self.hidden_size)
+        self.word_convert = nn.Linear(self.hidden_size, self.word_num)
 
         if params['dropout']:
             self.dropout = nn.Dropout(params['dropout_ratio'])
 
-    def _init_weights(self):
-        weight_attr = paddle.ParamAttr(
-            initializer = nn.initializer.KaimingUniform())
-        bias_attr = paddle.ParamAttr(
-            initializer = nn.initializer.KaimingUniform())
-        return weight_attr, bias_attr
+    # def _init_weights(self):
+    #     weight_attr = paddle.ParamAttr(
+    #         initializer = nn.initializer.KaimingUniform())
+    #     bias_attr = paddle.ParamAttr(
+    #         initializer = nn.initializer.KaimingUniform())
+    #     return weight_attr, bias_attr
 
     def forward(self, cnn_features, labels, counting_preds, images_mask, labels_mask, is_train=True):
         batch_size, num_steps = labels.shape # b, t
