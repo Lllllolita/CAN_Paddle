@@ -251,7 +251,7 @@ python tools/predict.py
 ```
 python tools/predict.py --device 'gpu'
 ```
-其中，使用gpu预测时，默认使用'gpu:0'进行预测，如果不是'gpu:0'请重新指定全局gpu设备为'gpu:0'。
+其中，使用gpu预测时，默认使用'gpu:0'进行预测。
 
 可以使用以下命令更换预测使用的模型和预测图片：
 ```
