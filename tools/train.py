@@ -68,9 +68,8 @@ else:
     writer = SummaryWriter(f'{params["log_dir"]}/{model.name}')
 
 # 学习率对象，是否调参
-lr_scheduler = build_lr_scheduler(0.01, len(train_loader), 200, int(params["epochs"]), warmup_epoch=1)
 # lr_scheduler = build_lr_scheduler(0.001, len(train_loader), 200, int(params["epochs"]), warmup_epoch=1)
-# lr_scheduler = build_lr_scheduler(float(params["lr"]), len(train_loader), 200, int(params["epochs"]), warmup_epoch=1)
+lr_scheduler = build_lr_scheduler(float(params["lr"]), len(train_loader), 200, int(params["epochs"]), warmup_epoch=1)
 
 # 梯度裁剪对象（对应torch.nn.utils.clip_grad_norm_）
 if params['gradient_clip']:
