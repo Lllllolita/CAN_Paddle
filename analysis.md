@@ -54,8 +54,12 @@
 
 图5给出了torch和paddle分别使用SGD优化器训练模型的曲线，其中绿色曲线为torch版本模型的训练、验证曲线，粉色曲线为paddle版本的训练、验证曲线。
 
+由于torch的卷积层和线性层默认的初始化方式为Kaiming Uniform，为了对比实验结果，我们将paddle版本的模型的卷积层与线性层的初始化方式也改为Kaiming Uniform。
+
 ![image-20220927133952095](images/image-20220927133952095.png)
 
 ​		可以观察到，二者的优化趋势、验证指标等大致相同，训练的差距小于10%，并且使用paddle模型验证的效果要优于torch。
 
-​		最终，paddle版本达到的exprate精度为50.81，torch达到的精度为50.20。paddle的验证精度优于torch，相差0.61。
+​		paddle版本达到的exprate精度为50.81，torch达到的精度为50.20。paddle的验证精度优于torch，相差0.61。
+
+我们同时也采用默认的初始化方式，训练了paddle模型，精度为51.72。
