@@ -2,13 +2,12 @@ import os
 import numpy as np
 import pickle as pkl
 
-# from PIL import Image
+
 import cv2
 from paddle import inference
 from utils.util import load_config
 from utils.util_infer import Words
-# from utils.process_ops import Words
-# from dataset import   Words
+
 class InferenceEngine(object):
     """InferenceEngine
     
@@ -146,7 +145,7 @@ def get_args(add_help=True):
     parser.add_argument( 
         "--benchmark", default=False, type=str2bool, help="benchmark")
      
-    # parser.add_argument("--word_path",default="../test_images/words_dict.txt",type=str,help="word_dict")
+  
     parser.add_argument('--config_file', default="./config.yaml", help='config_file')
 
     args = parser.parse_args()
