@@ -5,8 +5,9 @@ import pickle as pkl
 # from PIL import Image
 import cv2
 from paddle import inference
-
-from utils.process_ops import Words
+from utils.util import load_config
+from utils.util_infer import Words
+# from utils.process_ops import Words
 # from dataset import   Words
 class InferenceEngine(object):
     """InferenceEngine
@@ -25,8 +26,8 @@ class InferenceEngine(object):
     
         # init inference engine
         self.predictor, self.config= self.load_predictor(
-            os.path.join(args.model_dir, "inference(48).pdmodel"),
-            os.path.join(args.model_dir, "inference(48).pdiparams"))
+            os.path.join(args.model_dir, "inference_faster.pdmodel"),
+            os.path.join(args.model_dir, "inference_faster.pdiparams"))
       
     def load_predictor(self, model_file_path, params_file_path):
         """load_predictor
@@ -131,7 +132,7 @@ def get_args(add_help=True):
         description="PaddlePaddle Classification Training", add_help=add_help)
 
     parser.add_argument(
-        "--model_dir", default="./model", help="inference model dir")
+        "--model_dir", default="./test_model/", help="inference model dir")
     parser.add_argument(
         "--use_gpu", default=False, type=str2bool, help="use_gpu")
     parser.add_argument(
@@ -140,12 +141,14 @@ def get_args(add_help=True):
 
     parser.add_argument(
         "--resize_size", default=256, type=int, help="resize_size")
-    parser.add_argument("--img_path", default="../test_images/test_example/test_01.jpeg")
+    parser.add_argument("--img_path", default="./test_images/test_example/test_01.jpeg")
 
     parser.add_argument( 
         "--benchmark", default=False, type=str2bool, help="benchmark")
      
-    parser.add_argument("--word_path",default="../test_images/words_dict.txt",type=str,help="word_dict")
+    # parser.add_argument("--word_path",default="../test_images/words_dict.txt",type=str,help="word_dict")
+    parser.add_argument('--config_file', default="./config.yaml", help='config_file')
+
     args = parser.parse_args()
     return args
 
@@ -186,8 +189,9 @@ def infer_main(args):
 
     if args.benchmark:
         autolog.times.stamp()
-
-    result_seq = inference_engine.postprocess(output , Words(args.word_path))
+    params=load_config(args.config_file)
+    # result_seq = inference_engine.postprocess(output , Words(args.word_path))
+    result_seq = inference_engine.postprocess(output , Words(params['word_path']))
 
     if args.benchmark:
         autolog.times.stamp()

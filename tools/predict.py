@@ -22,15 +22,15 @@ sys.path.append(os.path.abspath(os.path.join(__dir__, '../')))
 def get_args(add_help=True):
     import argparse
     parser = argparse.ArgumentParser(
-        description='PaddlePaddle Classification Training', add_help=add_help)
-    parser.add_argument('--pretrained', default="./CAN_2022-09-12-21-24_decoder-AttDecoder_WordRate-0.9166_ExpRate-0.5172_201.pdparams", help='pretrained model')
+        description='PaddlePaddle Can(OCR) Predict', add_help=add_help)
+    parser.add_argument('--pretrained', default="./test_model/predict.pdparams", help='pretrained model')
     parser.add_argument('--device', default='cpu', help='device')
     # parser.add_argument('--resize-size', default=224, help='resize_size')
     # parser.add_argument('--crop-size', default=256, help='crop_szie')
-    parser.add_argument('--img_path', default='./test_images/RIT_2014_94.jpeg', help='path where to save')
+    parser.add_argument('--img_path', default='./test_images/test_example/test_01.jpeg', help='path where to save')
     parser.add_argument('--is_model_key', default=False, help='is_model_key')
     parser.add_argument('--config_file', default="./config.yaml", help='config_file')
-    parser.add_argument("--word_path",default="./paddlevision/datasets/CROHME/words_dict.txt",type=str,help="word_dict")
+    #parser.add_argument("--word_path",default="./test_images/words_dict.txt",type=str,help="word_dict")
     # parser.add_argument('--num-classes', default=1000, help='num_classes')
     args = parser.parse_args()
     return args
@@ -42,12 +42,16 @@ def main(args):
     params=load_config(args.config_file)
    
     if args.device == 'gpu':
-        assert len(paddle.device.get_available_device()) >= 1, "there are not available gpu device !."
-        devices = paddle.device.get_available_device().remove('cpu')
-        device = devices[random.randint(0,len(devices)-1)]
+       # print(paddle.device.get_available_device())
+       # assert len(paddle.device.get_available_device()) >= 1, "there are not available gpu device !."
+       assert paddle.device.get_device()!='cpu',"there are not available gpu device"
+       #devices = paddle.device.get_available_device().remove('cpu')
+       # device = devices[random.randint(0,len(devices)-1)]
+       device=paddle.device.get_device()
     else :
         device = 'cpu'
     params['device'] = device
+    paddle.device.set_device(device)
     model=infer_paddle(params)
     if args.is_model_key:
         layer_state_dict=paddle.load(args.pretrained)['model']
@@ -68,7 +72,8 @@ def main(args):
     img=np.array(img)
     img = paddle.to_tensor(img[None ,None ,: , :],dtype='float32')
     seq_prob = model(img)
-    decoder = Words(args.word_path)
+    #decoder = Words(args.word_path)
+    decoder = Words(params['word_path'])
     seq_prob = decoder.decode(seq_prob)
     print(f"seq_prob: {seq_prob}")
     return seq_prob
