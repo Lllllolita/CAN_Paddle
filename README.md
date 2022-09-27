@@ -44,7 +44,7 @@ Counting-Aware Network（CAN）是2022年ECCV会议收录的手写数学公式�
 **目录说明**
 ```
 --CAN
-	--alignment                  # 对齐相关代码，删除后为完整复现代码
+    --alignment                  # 对齐相关代码，删除后为完整复现代码
         --step1-5
             --data               # 存放假数据（fake_data)和网络权重
             --lite_data          # 轻量数据集（16张，用于数据读取对齐）
