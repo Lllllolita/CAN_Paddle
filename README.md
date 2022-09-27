@@ -85,6 +85,7 @@ Counting-Aware Network（CAN）是2022年ECCV会议收录的手写数学公式�
         --export.py              # 导出静态模型主函数
         --predict.py             # 预测主函数
     --utils                      # 通用工具函数
+    analysis.md			 # 复现实验分析
     config.yaml			 # 训练、评估、模型使用等相关参数配置
     requirements.txt		 # 项目所需相关python工具包
 ```
@@ -103,9 +104,9 @@ Counting-Aware Network（CAN）是2022年ECCV会议收录的手写数学公式�
 |:---------:|:------:|:----------:|:----------:|
 | CAN | 57.00 | 51.72   | [预训练模型](https://pan.baidu.com/s/1bWG8UNK_GA9UxXkZ4RD7XA) 提取码：n5ea    [Inference模型](https://pan.baidu.com/s/1Jjfw7cSz9NRbGmINO2k1wg) 提取码：ipz9    [日志](https://pan.baidu.com/s/18G-dXlU3b1ja014wQiqlag) 提取码：ohu2    [预测模型](https://pan.baidu.com/s/1aUKUAWzRMbnDYxjHGRD_ZA) 提取码：em1l。
 
-参考repo使用Adadelta优化器训练模型，由于torch和paddle对于Adadelta的底层实现存在差异，导致使用paddle的Adadelta训练模型难以实现参考精度，并且学习过程出现困难，训练多次震荡。具体实验分析，见实验报告.docx，以及[训练、验证tensorboard日志](https://pan.baidu.com/s/1prO4DRLq2T99cDvdSGTumQ)，提取码：p6he。日志提供了基于torch和paddle，使用Adadelta优化器的训练、验证日志曲线。
+参考repo使用Adadelta优化器训练模型，由于torch和paddle对于Adadelta的底层实现存在差异，导致使用paddle的Adadelta训练模型难以实现参考精度，并且学习过程出现困难，训练多次震荡。具体实验分析，见analysis.md(https://github.com/Lllllolita/CAN_Paddle/blob/master/analysis.md)，以及[训练、验证tensorboard日志](https://pan.baidu.com/s/1prO4DRLq2T99cDvdSGTumQ)，提取码：p6he。日志提供了基于torch和paddle，使用Adadelta优化器的训练、验证日志曲线。
 
-因此，本repo使用Adadelta和SGD两种优化器训练模型，并与参考repo使用SGD优化器训练的结果进行对比。最终结果表明，同样使用SGD训练，基于相同的参数初始化方式、固定随机种子、使用相同的训练参数调整策略，paddle优于torch精度，二者相差0.61%。具体实验分析，见实验报告.docx以及[训练、验证tensorboard日志](https://pan.baidu.com/s/1prO4DRLq2T99cDvdSGTumQ)，提取码：p6he。日志提供了基于torch和paddle，使用SGD优化器的训练、验证日志曲线。
+因此，本repo使用Adadelta和SGD两种优化器训练模型，并与参考repo使用SGD优化器训练的结果进行对比。最终结果表明，同样使用SGD训练，基于相同的参数初始化方式、固定随机种子、使用相同的训练参数调整策略，paddle优于torch精度，二者相差0.61%。具体实验分析，见analysis.md(https://github.com/Lllllolita/CAN_Paddle/blob/master/analysis.md)，以及[训练、验证tensorboard日志](https://pan.baidu.com/s/1prO4DRLq2T99cDvdSGTumQ)，提取码：p6he。日志提供了基于torch和paddle，使用SGD优化器的训练、验证日志曲线。
 
 本repo默认设置为基于SGD训练，可在[config.yaml](https://github.com/Lllllolita/CAN_Paddle/blob/master/config.yaml)中，修改optimizer为Adadelta，以进行验证。
 
@@ -176,7 +177,7 @@ inference模型：您可以在[百度网盘](https://pan.baidu.com/s/1Jjfw7cSz9N
 
 ### 4.1 模型训练
 
-训练文件在tools文件夹的train.py，由于代码中的路径均使用与CAN_Paddle文件夹的相对路径形式表示，因此需要先将CAN_Paddle文件夹指定为python的环境变量，设置为搜索路径的根路径。
+训练文件在tools文件夹的[train.py](https://github.com/Lllllolita/CAN_Paddle/blob/master/tools/train.py)，由于代码中的路径均使用与CAN_Paddle文件夹的相对路径形式表示，因此需要先将CAN_Paddle文件夹指定为python的环境变量，设置为搜索路径的根路径。
 进入CAN_Paddle文件夹，假设文件夹的绝对路径为/home/a/CAN_Paddle
 ```
 export PYTHONPATH=$PYTHONPATH:/home/a/CAN_Paddle
@@ -209,7 +210,7 @@ tensorboard保存的日志.tfevents文件位于logs文件夹内。
 
 ### 4.2 模型评估
 
-评估文件在tools文件夹的train.py，由于代码中的路径均使用与CAN_Paddle文件夹的相对路径形式表示，因此需要先将CAN_Paddle文件夹指定为python的环境变量，设置为搜索路径的根路径。
+评估文件在tools文件夹的[train.py](https://github.com/Lllllolita/CAN_Paddle/blob/master/tools/train.py)，由于代码中的路径均使用与CAN_Paddle文件夹的相对路径形式表示，因此需要先将CAN_Paddle文件夹指定为python的环境变量，设置为搜索路径的根路径。
 进入CAN_Paddle文件夹，假设文件夹的绝对路径为/home/a/CAN_Paddle
 ```
 export PYTHONPATH=$PYTHONPATH:/home/a/CAN_Paddle
@@ -236,7 +237,7 @@ tensorboard保存的日志.tfevents文件位于logs文件夹内。
 
 ### 4.3 模型预测
 
-预测文件在tools文件夹的predict.py，由于代码中的路径均使用与CAN_Paddle文件夹的相对路径形式表示，因此需要先将CAN_Paddle文件夹指定为python的环境变量，设置为搜索路径的根路径。
+预测文件在tools文件夹的[predict.py](https://github.com/Lllllolita/CAN_Paddle/blob/master/tools/predict.py)，由于代码中的路径均使用与CAN_Paddle文件夹的相对路径形式表示，因此需要先将CAN_Paddle文件夹指定为python的环境变量，设置为搜索路径的根路径。
 进入CAN_Paddle文件夹，假设文件夹的绝对路径为/home/a/CAN_Paddle
 ```
 export PYTHONPATH=$PYTHONPATH:/home/a/CAN_Paddle
@@ -288,7 +289,7 @@ TensorBoard 2.5.0 at http://localhost:6006/ (Press CTRL+C to quit)
 
 
 ## 5. 模型推理部署
-推理文件在tools文件夹的infer.py，由于代码中的路径均使用与CAN_Paddle文件夹的相对路径形式表示，因此需要先将CAN_Paddle文件夹指定为python的环境变量，设置为搜索路径的根路径。
+推理文件在tools文件夹的[infer.py](https://github.com/Lllllolita/CAN_Paddle/blob/master/tools/infer.py)，由于代码中的路径均使用与CAN_Paddle文件夹的相对路径形式表示，因此需要先将CAN_Paddle文件夹指定为python的环境变量，设置为搜索路径的根路径。
 进入CAN_Paddle文件夹，假设文件夹的绝对路径为/home/a/CAN_Paddle
 ```
 export PYTHONPATH=$PYTHONPATH:/home/a/CAN_Paddle
