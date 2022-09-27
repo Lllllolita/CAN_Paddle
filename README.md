@@ -61,7 +61,7 @@ Counting-Aware Network（CAN）是2022年ECCV会议收录的手写数学公式�
         --result                 # 对齐结果
         README.md
     --checkpoints                # 存放训练保存的模型文件
-	--images                     # 存放仓库显示图片
+    --images                     # 存放仓库显示图片
     --logs                       # 存放tensorboard日志
     --models                     # 模型定义
     --paddlevision               # 数据集加载、优化器等工具函数
@@ -73,9 +73,9 @@ Counting-Aware Network（CAN）是2022年ECCV会议收录的手写数学公式�
         --eval.sh
         --infer.sh
         --export.sh
-	--test_images                # 存放小数据集
-	    --lite_data.tar
-	--test_tipc
+    --test_images                # 存放小数据集
+	--lite_data.tar
+    --test_tipc
     --tools                      # 训练、评估、预测、推理等函数
         --train.py               # 训练、评估主函数
         --eval.py                # 训练、评估功能函数
