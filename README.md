@@ -15,7 +15,6 @@
     - [4.1 模型训练]()
     - [4.2 模型评估]()
     - [4.3 模型预测]()
-    - [4.4 查看训练、评估日志]()
     
 - [5. 模型推理部署]()
     - [5.1 基于Inference的推理]()
@@ -159,7 +158,7 @@ tar -xf test_images/lite_data.tar
 
 ### 3.3 准备模型
 
-预训练模型：您可以在[百度网盘](https://pan.baidu.com/s/1bWG8UNK_GA9UxXkZ4RD7XA)下载预训练模型，提取码：n5ea。下载模型文件后，将模型放置于CAN_Paddle根目录，并将[config.yaml](https://github.com/Lllllolita/CAN_Paddle/blob/master/config.yaml)中的checkpoint改为模型文件的前缀名。
+预训练模型：您可以在[百度网盘](https://pan.baidu.com/s/1bWG8UNK_GA9UxXkZ4RD7XA)下载预训练模型，提取码：n5ea。下载模型文件后，将[config.yaml](https://github.com/Lllllolita/CAN_Paddle/blob/master/config.yaml)中的checkpoint改为模型文件的前缀名。
 进入config.yaml，假设模型文件名为CAN_123.pdparams
 ```
 checkpoint: "CAN_123"
@@ -197,10 +196,6 @@ Start training
 ```
 超参数设置于config.yaml，包括初始学习率、批大小、学习率调参相关设置等。
 
-训练保存的模型.pdparams文件位于checkpoints文件夹内，默认设置为只保存当前最优模型。
-
-tensorboard保存的日志.events文件位于logs文件夹内。
-
 ### 4.2 模型评估
 
 评估文件在tools文件夹的train.py，由于代码中的路径均使用与CAN文件夹的相对路径形式表示，因此需要先将CAN文件夹指定为python的环境变量，设置为搜索路径的根路径。
@@ -208,8 +203,6 @@ tensorboard保存的日志.events文件位于logs文件夹内。
 ```
 export PYTHONPATH=$PYTHONPATH:/home/a/CAN_Paddle
 ```
-下载本repo提供的[预训练模型](https://pan.baidu.com/s/1bWG8UNK_GA9UxXkZ4RD7XA)，提取码：n5ea，或自行训练并保存模型。将模型.pdparams文件放置于CAN_Paddle根目录，并将[config.yaml](https://github.com/Lllllolita/CAN_Paddle/blob/master/config.yaml)中的checkpoint改为模型文件的前缀名。
-
 然后启动评估命令
 ```
 python tools/train.py --dataset CROHME --test-only
@@ -229,8 +222,6 @@ init tensorboard
 [Epoch 1, iter: 3] wordRate: 0.80723, expRate: 0.00000, word_loss: 1.06320, counting_loss: 0.32089
 ```
 
-tensorboard保存的日志.events文件位于logs文件夹内。
-
 ### 4.3 模型预测
 
 预测文件在tools文件夹的predict.py，由于代码中的路径均使用与CAN文件夹的相对路径形式表示，因此需要先将CAN文件夹指定为python的环境变量，设置为搜索路径的根路径。
@@ -238,17 +229,28 @@ tensorboard保存的日志.events文件位于logs文件夹内。
 ```
 export PYTHONPATH=$PYTHONPATH:/home/a/CAN_Paddle
 ```
-预测预训练模型可以通过模型准备的百度网盘的连接进行下载，预测样例图片在test_images的test_expamples里，词表文件为test_images的word-dict.txt。
+预测预训练模型可以通过模型准备的百度网盘的连接进行下载，下载完的模型放在test_model文件夹里,并更名为predict.pdparams，预测样例图片在test_images的test_expamples里。
 
 简单的预测命令如下：
+（1）使用cpu进行预测：
 ```
-python tools/predict.py --pretrained your_model_path --device ('cpu' or 'gpu') --img_path your_img_path --config_file your_config_file --word_path your_word_path
+python tools/predict.py 
 ```
+（2）使用gpu进行预测：
+```
+python tools/predict.py --device 'gpu'
+```
+其中，使用gpu预测时，默认使用'gpu:0'进行预测，如果不是'gpu:0'请重新指定全局gpu设备为'gpu:0'。<br>
 
+可以使用以下命令更换预测使用的模型和预测图片：
+```
+python tools/infer.py --pretrained your_model_path --img_path your_img_path 
+```
+其中,--pretrained写入预测所需模型文件夹路径，--img_path需要提供预测图片路径。<br>
 输出结果格式如下所示:
 ```
 共 111 类符号。
-seq_prob: \sum _ { n = 1 } ^ { \infty } \frac { \cos \pi n } { n }
+seq_prob: \frac { 1 } { 3 } \pi r ^ { 2 } h
 ```
 
 
@@ -259,15 +261,25 @@ seq_prob: \sum _ { n = 1 } ^ { \infty } \frac { \cos \pi n } { n }
 export PYTHONPATH=$PYTHONPATH:/home/a/CAN_Paddle
 ```
 
-模型使用inference进行推理部署，简单的推理命令如下：
+模型使用inference进行推理部署，inference模型可以通过模型准备的百度网盘的连接进行下载，下载完的模型放在test_model文件夹里，预测样例图片在test_images的test_expamples里。
+简单的推理命令如下：
+（1）使用cpu进行推理：
 ```
-python tools/infer.py --model_dir your_model_path --img_path your_img_path --word_path your_word_path
+python tools/infer.py 
 ```
-其中,--model_dir写入预测所需模型文件夹路径，--img_path需要提供预测图片路径，--word_path需要提供词表路径。
+（2）使用gpu进行推理：
+```
+python tools/infer.py --use_gpu True
+```
+可以使用以下命令更换推理使用的模型和预测图片：
+```
+python tools/infer.py --model_dir your_model_path --img_path your_img_path 
+```
+其中,--model_dir写入推理所需模型文件夹路径，--img_path需要提供推理图片路径。<br>
 输出结果格式如下所示:
 ```
 共 111 类符号。
-image_name: ./images/RIT_2014_94.jpeg, result_seq: \sum _ { n = 1 } ^ { \infty } \frac { \cos \pi n } { n }
+image_name: ./images/RIT_2014_94.jpeg, result_seq: \frac { 1 } { 3 } \pi r ^ { 2 } h
 ```
 
 
