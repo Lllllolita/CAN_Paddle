@@ -42,7 +42,7 @@ def main(args):
     params=load_config(args.config_file)
    
     if args.device == 'gpu':
-        assert len(paddle.device.get_available_device()) > 1, "there are not available gpu device !."
+        assert len(paddle.device.get_available_device()) >= 1, "there are not available gpu device !."
         devices = paddle.device.get_available_device().remove('cpu')
         device = devices[random.randint(0,len(devices)-1)]
     else :

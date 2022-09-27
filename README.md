@@ -69,7 +69,7 @@ Counting-Aware Network（CAN）是2022年ECCV会议收录的手写数学公式�
         --infer.sh
         --export.sh
 	--test_images
-	  --lite_data.tar
+	    --lite_data.tar
 	--test_tipc
     --tools
         --train.py
