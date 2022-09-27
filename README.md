@@ -102,9 +102,9 @@ Counting-Aware Network（CAN）是2022年ECCV会议收录的手写数学公式�
 |:---------:|:------:|:----------:|:----------:|
 | CAN | 57.00 | 51.72   | [预训练模型](https://pan.baidu.com/s/1bWG8UNK_GA9UxXkZ4RD7XA) 提取码：n5ea    [Inference模型](https://pan.baidu.com/s/1Jjfw7cSz9NRbGmINO2k1wg) 提取码：ipz9    [日志](https://pan.baidu.com/s/18G-dXlU3b1ja014wQiqlag) 提取码：ohu2
 
-参考repo使用Adadelta优化器训练模型，由于torch和paddle对于Adadelta的底层实现存在差异，导致使用paddle的Adadelta训练模型难以实现参考精度，并且学习过程出现困难，训练多次震荡。具体实验分析，见实验报告.docx，以及训练、验证tensorboard日志。日志提供了基于torch和paddle，使用Adadelta优化器的训练、验证日志曲线。
+参考repo使用Adadelta优化器训练模型，由于torch和paddle对于Adadelta的底层实现存在差异，导致使用paddle的Adadelta训练模型难以实现参考精度，并且学习过程出现困难，训练多次震荡。具体实验分析，见实验报告.docx，以及[训练、验证tensorboard日志](https://pan.baidu.com/s/1prO4DRLq2T99cDvdSGTumQ)，提取码：p6he。日志提供了基于torch和paddle，使用Adadelta优化器的训练、验证日志曲线。
 
-因此，本repo使用Adadelta和SGD两种优化器训练模型，并与参考repo使用SGD优化器训练的结果进行对比。最终结果表明，同样使用SGD训练，基于相同的参数初始化方式、固定随机种子、使用相同的训练参数调整策略，paddle优于torch精度，二者相差0.61%。具体实验分析，见实验报告.docx以及训练、验证tensorboard日志。日志提供了基于torch和paddle，使用SGD优化器的训练、验证日志曲线。
+因此，本repo使用Adadelta和SGD两种优化器训练模型，并与参考repo使用SGD优化器训练的结果进行对比。最终结果表明，同样使用SGD训练，基于相同的参数初始化方式、固定随机种子、使用相同的训练参数调整策略，paddle优于torch精度，二者相差0.61%。具体实验分析，见实验报告.docx以及[训练、验证tensorboard日志](https://pan.baidu.com/s/1prO4DRLq2T99cDvdSGTumQ)，提取码：p6he。日志提供了基于torch和paddle，使用SGD优化器的训练、验证日志曲线。
 
 本repo默认设置为基于SGD训练，可在[config.yaml](https://github.com/Lllllolita/CAN_Paddle/blob/master/config.yaml)中，修改optimizer为Adadelta，以进行验证。
 
@@ -166,7 +166,7 @@ checkpoint: "CAN_123"
 ```
 inference模型：您可以在[百度网盘](https://pan.baidu.com/s/1Jjfw7cSz9NRbGmINO2k1wg)下载inference模型，提取码：ipz9。
 
-训练、验证日志：您可以在[百度网盘]()下载tensorboard日志（.tfevents文件），提取码：n5ea。下载日志后，将logs文件夹放置于CAN_Paddle根目录（替换repo中的logs文件夹）。
+训练、验证日志：您可以在[百度网盘](https://pan.baidu.com/s/1prO4DRLq2T99cDvdSGTumQ)下载tensorboard日志（.tfevents文件），提取码：p6he。下载日志后，将logs文件夹放置于CAN_Paddle根目录（替换repo中的logs文件夹）。
 
 ## 4. 开始使用
 
@@ -264,7 +264,7 @@ seq_prob: \frac { 1 } { 3 } \pi r ^ { 2 } h
 
 ### 4.4 查看训练、评估日志
 
-下载本repo提供的[tensorboard日志]()，提取码：n5ea，或自行训练并保存日志。下载日志后，将logs文件夹放置于CAN_Paddle根目录（替换repo中的logs文件夹）。日志提供了基于torch和paddle，使用Adadelta、SGD优化器的训练、验证日志曲线。
+下载本repo提供的[tensorboard日志](https://pan.baidu.com/s/1prO4DRLq2T99cDvdSGTumQ)，提取码：p6he，或自行训练并保存日志。下载日志后，将logs文件夹放置于CAN_Paddle根目录（替换repo中的logs文件夹）。日志提供了基于torch和paddle，使用Adadelta、SGD优化器的训练、验证日志曲线。
 进入logs文件夹，假设文件夹的绝对路径为/home/a/CAN_Paddle/logs
 ```
 tensorboard --logdir=/home/a/CAN_Paddle/logs --port=6006
