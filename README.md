@@ -158,7 +158,7 @@ tar -xf test_images/lite_data.tar
 
 ### 3.3 准备模型
 
-预训练模型：您可以在[百度网盘](https://pan.baidu.com/s/1bWG8UNK_GA9UxXkZ4RD7XA)下载预训练模型，提取码：n5ea。下载模型文件后，将[config.yaml](https://github.com/Lllllolita/CAN_Paddle/blob/master/config.yaml)中的checkpoint改为模型文件的前缀名。
+预训练模型：您可以在[百度网盘](https://pan.baidu.com/s/1bWG8UNK_GA9UxXkZ4RD7XA)下载预训练模型，提取码：n5ea。下载模型文件后，将模型放置于CAN_Paddle根目录，并将[config.yaml](https://github.com/Lllllolita/CAN_Paddle/blob/master/config.yaml)中的checkpoint改为模型文件的前缀名。
 进入config.yaml，假设模型文件名为CAN_123.pdparams
 ```
 checkpoint: "CAN_123"
@@ -196,6 +196,10 @@ Start training
 ```
 超参数设置于config.yaml，包括初始学习率、批大小、学习率调参相关设置等。
 
+训练保存的模型.pdparams文件位于checkpoints文件夹内，默认设置为只保存当前最优模型。
+
+tensorboard保存的日志.events文件位于logs文件夹内。
+
 ### 4.2 模型评估
 
 评估文件在tools文件夹的train.py，由于代码中的路径均使用与CAN文件夹的相对路径形式表示，因此需要先将CAN文件夹指定为python的环境变量，设置为搜索路径的根路径。
@@ -203,6 +207,8 @@ Start training
 ```
 export PYTHONPATH=$PYTHONPATH:/home/a/CAN_Paddle
 ```
+下载本repo提供的[预训练模型](https://pan.baidu.com/s/1bWG8UNK_GA9UxXkZ4RD7XA)，提取码：n5ea，或自行训练并保存模型。将模型.pdparams文件放置于CAN_Paddle根目录，并将[config.yaml](https://github.com/Lllllolita/CAN_Paddle/blob/master/config.yaml)中的checkpoint改为模型文件的前缀名。
+
 然后启动评估命令
 ```
 python tools/train.py --dataset CROHME --test-only
@@ -221,6 +227,8 @@ init tensorboard
 [Epoch 1, iter: 2] wordRate: 0.85185, expRate: 0.00000, word_loss: 0.31574, counting_loss: 0.01928
 [Epoch 1, iter: 3] wordRate: 0.80723, expRate: 0.00000, word_loss: 1.06320, counting_loss: 0.32089
 ```
+
+tensorboard保存的日志.events文件位于logs文件夹内。
 
 ### 4.3 模型预测
 
