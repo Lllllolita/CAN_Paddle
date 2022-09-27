@@ -15,7 +15,8 @@
     - [4.1 模型训练]()
     - [4.2 模型评估]()
     - [4.3 模型预测]()
-    
+    - [4.4 查看训练、评估日志]()
+ 
 - [5. 模型推理部署]()
     - [5.1 基于Inference的推理]()
     
@@ -101,9 +102,9 @@ Counting-Aware Network（CAN）是2022年ECCV会议收录的手写数学公式�
 |:---------:|:------:|:----------:|:----------:|
 | CAN | 57.00 | 51.72   | [预训练模型](https://pan.baidu.com/s/1bWG8UNK_GA9UxXkZ4RD7XA) 提取码：n5ea    [Inference模型](https://pan.baidu.com/s/1Jjfw7cSz9NRbGmINO2k1wg) 提取码：ipz9    [日志](https://pan.baidu.com/s/18G-dXlU3b1ja014wQiqlag) 提取码：ohu2
 
-参考repo使用Adadelta优化器训练模型，由于torch和paddle对于Adadelta的底层实现存在差异，导致使用paddle的Adadelta训练模型难以实现参考精度，并且学习过程出现困难，训练多次震荡。具体实验分析，见实验报告.docx。
+参考repo使用Adadelta优化器训练模型，由于torch和paddle对于Adadelta的底层实现存在差异，导致使用paddle的Adadelta训练模型难以实现参考精度，并且学习过程出现困难，训练多次震荡。具体实验分析，见实验报告.docx，以及训练、验证tensorboard日志。日志提供了基于torch和paddle，使用Adadelta优化器的训练、验证日志曲线。
 
-因此，本repo使用Adadelta和SGD两种优化器训练模型，并与参考repo使用SGD优化器训练的结果进行对比。最终结果表明，同样使用SGD训练，基于相同的参数初始化方式、固定随机种子、使用相同的训练参数调整策略，paddle优于torch精度，二者相差0.61%。
+因此，本repo使用Adadelta和SGD两种优化器训练模型，并与参考repo使用SGD优化器训练的结果进行对比。最终结果表明，同样使用SGD训练，基于相同的参数初始化方式、固定随机种子、使用相同的训练参数调整策略，paddle优于torch精度，二者相差0.61%。具体实验分析，见实验报告.docx以及训练、验证tensorboard日志。日志提供了基于torch和paddle，使用SGD优化器的训练、验证日志曲线。
 
 本repo默认设置为基于SGD训练，可在[config.yaml](https://github.com/Lllllolita/CAN_Paddle/blob/master/config.yaml)中，修改optimizer为Adadelta，以进行验证。
 
@@ -165,13 +166,15 @@ checkpoint: "CAN_123"
 ```
 inference模型：您可以在[百度网盘](https://pan.baidu.com/s/1Jjfw7cSz9NRbGmINO2k1wg)下载inference模型，提取码：ipz9。
 
+训练、验证日志：您可以在[百度网盘]()下载tensorboard日志（.tfevents文件），提取码：n5ea。下载日志后，将logs文件夹放置于CAN_Paddle根目录（替换repo中的logs文件夹）。
+
 ## 4. 开始使用
 
 
 ### 4.1 模型训练
 
-训练文件在tools文件夹的train.py，由于代码中的路径均使用与CAN_Paddle文件夹的相对路径形式表示，因此需要先将CAN文件夹指定为python的环境变量，设置为搜索路径的根路径。
-进入CAN文件夹，假设文件夹的绝对路径为/home/a/CAN_Paddle
+训练文件在tools文件夹的train.py，由于代码中的路径均使用与CAN_Paddle文件夹的相对路径形式表示，因此需要先将CAN_Paddle文件夹指定为python的环境变量，设置为搜索路径的根路径。
+进入CAN_Paddle文件夹，假设文件夹的绝对路径为/home/a/CAN_Paddle
 ```
 export PYTHONPATH=$PYTHONPATH:/home/a/CAN_Paddle
 ```
@@ -196,10 +199,15 @@ Start training
 ```
 超参数设置于config.yaml，包括初始学习率、批大小、学习率调参相关设置等。
 
+训练保存的模型.pdparams文件位于checkpoints文件夹内，默认设置为只保存当前最优模型。
+
+tensorboard保存的日志.tfevents文件位于logs文件夹内。
+
+
 ### 4.2 模型评估
 
-评估文件在tools文件夹的train.py，由于代码中的路径均使用与CAN文件夹的相对路径形式表示，因此需要先将CAN文件夹指定为python的环境变量，设置为搜索路径的根路径。
-进入CAN文件夹，假设文件夹的绝对路径为/home/a/CAN_Paddle
+评估文件在tools文件夹的train.py，由于代码中的路径均使用与CAN_Paddle文件夹的相对路径形式表示，因此需要先将CAN_Paddle文件夹指定为python的环境变量，设置为搜索路径的根路径。
+进入CAN_Paddle文件夹，假设文件夹的绝对路径为/home/a/CAN_Paddle
 ```
 export PYTHONPATH=$PYTHONPATH:/home/a/CAN_Paddle
 ```
@@ -221,11 +229,12 @@ init tensorboard
 [Epoch 1, iter: 2] wordRate: 0.85185, expRate: 0.00000, word_loss: 0.31574, counting_loss: 0.01928
 [Epoch 1, iter: 3] wordRate: 0.80723, expRate: 0.00000, word_loss: 1.06320, counting_loss: 0.32089
 ```
+tensorboard保存的日志.tfevents文件位于logs文件夹内。
 
 ### 4.3 模型预测
 
-预测文件在tools文件夹的predict.py，由于代码中的路径均使用与CAN文件夹的相对路径形式表示，因此需要先将CAN文件夹指定为python的环境变量，设置为搜索路径的根路径。
-进入CAN文件夹，假设文件夹的绝对路径为/home/a/CAN_Paddle
+预测文件在tools文件夹的predict.py，由于代码中的路径均使用与CAN_Paddle文件夹的相对路径形式表示，因此需要先将CAN_Paddle文件夹指定为python的环境变量，设置为搜索路径的根路径。
+进入CAN_Paddle文件夹，假设文件夹的绝对路径为/home/a/CAN_Paddle
 ```
 export PYTHONPATH=$PYTHONPATH:/home/a/CAN_Paddle
 ```
@@ -253,10 +262,30 @@ python tools/infer.py --pretrained your_model_path --img_path your_img_path
 seq_prob: \frac { 1 } { 3 } \pi r ^ { 2 } h
 ```
 
+### 4.4 查看训练、评估日志
+
+下载本repo提供的[tensorboard日志]()，提取码：n5ea，或自行训练并保存日志。下载日志后，将logs文件夹放置于CAN_Paddle根目录（替换repo中的logs文件夹）。日志提供了基于torch和paddle，使用Adadelta、SGD优化器的训练、验证日志曲线。
+进入logs文件夹，假设文件夹的绝对路径为/home/a/CAN_Paddle/logs
+```
+tensorboard --logdir=/home/a/CAN_Paddle/logs --port=6006
+```
+若tensorboard启动成功，则会输出
+```
+2022-09-27 13:47:14.105902: I tensorflow/stream_executor/platform/default/dso_loader.cc:53] Successfully opened dynamic library libcudart.so.11.0
+
+NOTE: Using experimental fast data loading logic. To disable, pass
+    "--load_fast=false" and report issues on GitHub. More details:
+    https://github.com/tensorflow/tensorboard/issues/4784
+
+Serving TensorBoard on localhost; to expose to the network, use a proxy or pass --bind_all
+TensorBoard 2.5.0 at http://localhost:6006/ (Press CTRL+C to quit)
+```
+启动成功后，在浏览器输入：http://localhost:6006/ 即可进入tensorboard。
+
 
 ## 5. 模型推理部署
-推理文件在tools文件夹的infer.py，由于代码中的路径均使用与CAN文件夹的相对路径形式表示，因此需要先将CAN文件夹指定为python的环境变量，设置为搜索路径的根路径。
-进入CAN文件夹，假设文件夹的绝对路径为/home/a/CAN_Paddle
+推理文件在tools文件夹的infer.py，由于代码中的路径均使用与CAN_Paddle文件夹的相对路径形式表示，因此需要先将CAN_Paddle文件夹指定为python的环境变量，设置为搜索路径的根路径。
+进入CAN_Paddle文件夹，假设文件夹的绝对路径为/home/a/CAN_Paddle
 ```
 export PYTHONPATH=$PYTHONPATH:/home/a/CAN_Paddle
 ```
