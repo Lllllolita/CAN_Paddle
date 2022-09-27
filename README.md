@@ -295,7 +295,7 @@ TensorBoard 2.5.0 at http://localhost:6006/ (Press CTRL+C to quit)
 export PYTHONPATH=$PYTHONPATH:/home/a/CAN_Paddle
 ```
 
-模型使用inference进行推理部署，inference模型可以通过模型准备的百度网盘的链接进行下载，下载完的模型（包括pdparams，pdparams.info，pdmodel文件）放在test_model文件夹里，要把inference和inference_faster文件全部下载下来，预测样例图片在test_images的test_expamples里。
+模型使用inference进行推理部署，inference模型可以通过模型准备的百度网盘的链接进行下载，下载完的模型（包括pdiparams，pdiparams.info，pdmodel文件）放在test_model文件夹里，要把inference和inference_faster文件全部下载下来，预测样例图片在test_images的test_expamples里。
 
 简单的推理命令如下：
 
@@ -307,7 +307,7 @@ python tools/infer.py
 ```
 python tools/infer.py --use_gpu True
 ```
-本项目准备了inference和inference_faster这两个模型，默认使用inference_faster这个模型，inference_faster主要识别序列较短的模型推理速度快于infernce,inference模型可以识别测试集中所有长度的序列，但是推理速度较慢。可以使用以下命令更换推理使用的模型和预测图片：
+本项目准备了inference和inference_faster这两个模型，默认使用inference_faster这个模型，inference_faster主要识别序列较短的模型推理速度快于infernce，inference模型可以识别测试集中所有长度的序列，但是推理速度较慢。可以使用以下命令更换推理使用的模型和预测图片：
 
 ```
 python tools/infer.py  --img_path your_img_path --if_fast (True or False)
