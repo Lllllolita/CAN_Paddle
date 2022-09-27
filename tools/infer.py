@@ -2,12 +2,13 @@ import os
 import numpy as np
 import pickle as pkl
 
-
+# from PIL import Image
 import cv2
 from paddle import inference
 from utils.util import load_config
 from utils.util_infer import Words
-
+# from utils.process_ops import Words
+# from dataset import   Words
 class InferenceEngine(object):
     """InferenceEngine
     
@@ -24,9 +25,15 @@ class InferenceEngine(object):
         self.args = args
     
         # init inference engine
-        self.predictor, self.config= self.load_predictor(
-            os.path.join(args.model_dir, "inference_faster.pdmodel"),
-            os.path.join(args.model_dir, "inference_faster.pdiparams"))
+        if args.if_fast:
+            # print("if_fast")
+            self.predictor, self.config= self.load_predictor(
+                os.path.join(args.model_dir, "inference_faster.pdmodel"),
+                os.path.join(args.model_dir, "inference_faster.pdiparams"))
+        else:
+            self.predictor, self.config= self.load_predictor(
+                os.path.join(args.model_dir, "inference.pdmodel"),
+                os.path.join(args.model_dir, "inference.pdiparams"))
       
     def load_predictor(self, model_file_path, params_file_path):
         """load_predictor
@@ -43,6 +50,7 @@ class InferenceEngine(object):
         args = self.args
         config = inference.Config(model_file_path, params_file_path)
         if args.use_gpu:
+            # print("use_gpu")
             config.enable_use_gpu(1000, 0)
         else:
             config.disable_gpu()
@@ -145,9 +153,9 @@ def get_args(add_help=True):
     parser.add_argument( 
         "--benchmark", default=False, type=str2bool, help="benchmark")
      
-  
+    # parser.add_argument("--word_path",default="../test_images/words_dict.txt",type=str,help="word_dict")
     parser.add_argument('--config_file', default="./config.yaml", help='config_file')
-
+    parser.add_argument('--if_fast', default=True,type=str2bool, help='if_fast')
     args = parser.parse_args()
     return args
 
