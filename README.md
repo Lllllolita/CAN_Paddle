@@ -101,7 +101,7 @@ Counting-Aware Network（CAN）是2022年ECCV会议收录的手写数学公式�
 
 | 模型      | 参考精度 | 复现精度 | 下载链接 |
 |:---------:|:------:|:----------:|:----------:|
-| CAN | 57.00 | 51.72   | [预训练模型](https://pan.baidu.com/s/1bWG8UNK_GA9UxXkZ4RD7XA) 提取码：n5ea    [Inference模型](https://pan.baidu.com/s/1Jjfw7cSz9NRbGmINO2k1wg) 提取码：ipz9    [日志](https://pan.baidu.com/s/18G-dXlU3b1ja014wQiqlag) 提取码：ohu2
+| CAN | 57.00 | 51.72   | [预训练模型](https://pan.baidu.com/s/1bWG8UNK_GA9UxXkZ4RD7XA) 提取码：n5ea    [Inference模型](https://pan.baidu.com/s/1Jjfw7cSz9NRbGmINO2k1wg) 提取码：ipz9    [日志](https://pan.baidu.com/s/18G-dXlU3b1ja014wQiqlag) 提取码：ohu2    [预测模型](https://pan.baidu.com/s/1aUKUAWzRMbnDYxjHGRD_ZA) 提取码：em1l。
 
 参考repo使用Adadelta优化器训练模型，由于torch和paddle对于Adadelta的底层实现存在差异，导致使用paddle的Adadelta训练模型难以实现参考精度，并且学习过程出现困难，训练多次震荡。具体实验分析，见实验报告.docx，以及[训练、验证tensorboard日志](https://pan.baidu.com/s/1prO4DRLq2T99cDvdSGTumQ)，提取码：p6he。日志提供了基于torch和paddle，使用Adadelta优化器的训练、验证日志曲线。
 
@@ -165,6 +165,7 @@ tar -xf test_images/lite_data.tar
 ```
 checkpoint: "CAN_123"
 ```
+预测模型：您可以在[百度网盘](https://pan.baidu.com/s/1aUKUAWzRMbnDYxjHGRD_ZA)下载预测模型，提取码：em1l。
 inference模型：您可以在[百度网盘](https://pan.baidu.com/s/1Jjfw7cSz9NRbGmINO2k1wg)下载inference模型，提取码：ipz9。
 
 训练、验证日志：您可以在[百度网盘](https://pan.baidu.com/s/1prO4DRLq2T99cDvdSGTumQ)下载tensorboard日志（.tfevents文件），提取码：p6he。下载日志后，将logs文件夹放置于CAN_Paddle根目录（替换repo中的logs文件夹）。
