@@ -17,7 +17,7 @@ save_start: 0
 #optimizer: AdamW
 optimizer: SGD
 #optimizer: Adam
-lr: 1
+lr: 0.01
 lr_decay: cosine
 step_ratio: 10
 step_decay: 5
