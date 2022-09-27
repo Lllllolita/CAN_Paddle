@@ -8,7 +8,6 @@ import yaml
 import os
 import sys
 import numpy as np
-# from PIL import Image
 import cv2
 from models.infer_model import Inference as infer_paddle
 from utils.util import load_config
@@ -25,13 +24,9 @@ def get_args(add_help=True):
         description='PaddlePaddle Can(OCR) Predict', add_help=add_help)
     parser.add_argument('--pretrained', default="./test_model/predict.pdparams", help='pretrained model')
     parser.add_argument('--device', default='cpu', help='device')
-    # parser.add_argument('--resize-size', default=224, help='resize_size')
-    # parser.add_argument('--crop-size', default=256, help='crop_szie')
     parser.add_argument('--img_path', default='./test_images/test_example/test_01.jpeg', help='path where to save')
     parser.add_argument('--is_model_key', default=False, help='is_model_key')
     parser.add_argument('--config_file', default="./config.yaml", help='config_file')
-    #parser.add_argument("--word_path",default="./test_images/words_dict.txt",type=str,help="word_dict")
-    # parser.add_argument('--num-classes', default=1000, help='num_classes')
     args = parser.parse_args()
     return args
 
