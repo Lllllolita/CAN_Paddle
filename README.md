@@ -108,7 +108,7 @@ Counting-Aware Network（CAN）是2022年ECCV会议收录的手写数学公式�
 
 因此，本repo使用Adadelta和SGD两种优化器训练模型，并与参考repo使用SGD优化器训练的结果进行对比。最终结果表明，同样使用SGD训练，基于相同的参数初始化方式、固定随机种子、使用相同的训练参数调整策略，paddle优于torch精度，二者相差0.61%。具体实验分析，见analysis.md(https://github.com/Lllllolita/CAN_Paddle/blob/master/analysis.md)，以及[训练、验证tensorboard日志](https://pan.baidu.com/s/1prO4DRLq2T99cDvdSGTumQ)，提取码：p6he。日志提供了基于torch和paddle，使用SGD优化器的训练、验证日志曲线。
 
-本repo默认设置为基于SGD训练，可在[config.yaml](https://github.com/Lllllolita/CAN_Paddle/blob/master/config.yaml)中，修改optimizer为Adadelta，以进行验证。
+本repo默认设置为基于SGD训练，初始学习率为0.01，可在[config.yaml](https://github.com/Lllllolita/CAN_Paddle/blob/master/config.yaml)中，修改optimizer为Adadelta，lr为1，以进行Adadelta的实验验证。
 
 ## 3. 准备数据与环境
 
