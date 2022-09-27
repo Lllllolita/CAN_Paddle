@@ -139,6 +139,15 @@ pip install -r requirements.txt
 ### 3.2 准备数据
 
 您可以在[百度网盘](https://pan.baidu.com/share/init?surl=qUVQLZh5aPT6d7-m6il6Rg)下载全量数据集，提取码1234。下载数据集后，将CROHME文件夹放置于paddlevision/datasets文件夹中。
+**CROHME文件夹目录说明**
+```
+--CROHME
+    --14_test_images.pkl                  # 测试图片
+    --14_test_labels.txt		  # 测试标签
+    --train_images.pkl			  # 训练图片
+    --train_labels.txt			  # 训练标签
+    --words_dict.txt			  # 词表
+```
 
 如果只是希望快速体验模型训练功能，则可以直接解压`test_images/lite_data.tar`，其中包含16张训练图像以及16张验证图像。
 
@@ -161,10 +170,10 @@ inference模型：您可以在[百度网盘](https://pan.baidu.com/s/1Jjfw7cSz9N
 
 ### 4.1 模型训练
 
-训练文件在tools文件夹的train.py，由于代码中的路径均使用与CAN文件夹的相对路径形式表示，因此需要先将CAN文件夹指定为python的环境变量，设置为搜索路径的根路径。
-进入CAN文件夹，假设文件夹的绝对路径为/home/a/CAN
+训练文件在tools文件夹的train.py，由于代码中的路径均使用与CAN_Paddle文件夹的相对路径形式表示，因此需要先将CAN文件夹指定为python的环境变量，设置为搜索路径的根路径。
+进入CAN文件夹，假设文件夹的绝对路径为/home/a/CAN_Paddle
 ```
-export PYTHONPATH=$PYTHONPATH:/home/a/CAN
+export PYTHONPATH=$PYTHONPATH:/home/a/CAN_Paddle
 ```
 然后启动训练命令
 ```
@@ -190,9 +199,9 @@ Start training
 ### 4.2 模型评估
 
 评估文件在tools文件夹的train.py，由于代码中的路径均使用与CAN文件夹的相对路径形式表示，因此需要先将CAN文件夹指定为python的环境变量，设置为搜索路径的根路径。
-进入CAN文件夹，假设文件夹的绝对路径为/home/a/CAN
+进入CAN文件夹，假设文件夹的绝对路径为/home/a/CAN_Paddle
 ```
-export PYTHONPATH=$PYTHONPATH:/home/a/CAN
+export PYTHONPATH=$PYTHONPATH:/home/a/CAN_Paddle
 ```
 然后启动评估命令
 ```
@@ -216,9 +225,9 @@ init tensorboard
 ### 4.3 模型预测
 
 预测文件在tools文件夹的predict.py，由于代码中的路径均使用与CAN文件夹的相对路径形式表示，因此需要先将CAN文件夹指定为python的环境变量，设置为搜索路径的根路径。
-进入CAN文件夹，假设文件夹的绝对路径为/home/a/CAN
+进入CAN文件夹，假设文件夹的绝对路径为/home/a/CAN_Paddle
 ```
-export PYTHONPATH=$PYTHONPATH:/home/a/CAN
+export PYTHONPATH=$PYTHONPATH:/home/a/CAN_Paddle
 ```
 预测预训练模型可以通过模型准备的百度网盘的连接进行下载，预测样例图片在test_images的test_expamples里，词表文件为test_images的word-dict.txt。
 
@@ -236,9 +245,9 @@ seq_prob: \sum _ { n = 1 } ^ { \infty } \frac { \cos \pi n } { n }
 
 ## 5. 模型推理部署
 推理文件在tools文件夹的infer.py，由于代码中的路径均使用与CAN文件夹的相对路径形式表示，因此需要先将CAN文件夹指定为python的环境变量，设置为搜索路径的根路径。
-进入CAN文件夹，假设文件夹的绝对路径为/home/a/CAN
+进入CAN文件夹，假设文件夹的绝对路径为/home/a/CAN_Paddle
 ```
-export PYTHONPATH=$PYTHONPATH:/home/a/CAN
+export PYTHONPATH=$PYTHONPATH:/home/a/CAN_Paddle
 ```
 
 模型使用inference进行推理部署，简单的推理命令如下：
