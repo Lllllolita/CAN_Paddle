@@ -9,7 +9,7 @@
 | batch size           | 8                                                            |
 | 卷积层、线性层初始化 | kaiming Uniform                                              |
 | GRUCell初始化        | Uniform                                                      |
-| 学习率               | 初始值为1，第一个epoch从0开始warmup，第二个epoch进行余弦退火调整，周期为200epoch，第201个epoch改变余弦周期为240（paddle使用LRScheduler） |
+| 学习率               | 初始值为0.01，第一个epoch从0开始warmup，第二个epoch进行余弦退火调整，周期为200epoch，第201个epoch改变余弦周期为240（paddle使用LRScheduler） |
 | 优化器参数           | eps=1e-6，rho=0.9，weightdecay=1e-4                          |
 | 梯度裁剪             | Paddle.nn.ClipGradByGlobalNorm  <br />Torch.nn.utils.clip_grad_norm_ <br /> 梯度值为100 |
 
