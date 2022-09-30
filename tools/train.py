@@ -18,6 +18,7 @@ parser = argparse.ArgumentParser(description='model training')
 parser.add_argument('--dataset', default='CROHME', type=str, help='dataset name')
 parser.add_argument('--check', action='store_true', help='if trained')
 parser.add_argument('--outdir', default='outdir', action='store_true', help='save output')
+parser.add_argument('--device', default='gpu:0', type=str, help='device')
 parser.add_argument('--test-only', action='store_true', help='only evaluate')
 args = parser.parse_args()
 
@@ -37,7 +38,7 @@ np.random.seed(params['seed'])
 paddle.seed(params['seed'])
 
 # os.environ['CUDA_VISIBLE_DEVICES'] = '0'
-params['device'] = 'gpu:0'
+params['device'] = args.device
 # 设置计算设备(GPU\CPU)
 try:
     paddle.device.set_device(params['device'])
