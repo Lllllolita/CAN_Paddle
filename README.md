@@ -258,7 +258,7 @@ python tools/predict.py --device 'gpu'
 
 可以使用以下命令更换预测使用的模型和预测图片：
 ```
-python tools/infer.py --pretrained your_model_path --img_path your_img_path 
+python tools/predict.py --pretrained your_model_path --img_path your_img_path 
 ```
 其中,--pretrained写入预测所需模型文件夹路径，--img_path需要提供预测图片路径。<br>
 输出结果格式如下所示:
