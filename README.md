@@ -177,6 +177,8 @@ inference模型：您可以在[百度网盘](https://pan.baidu.com/s/1Jjfw7cSz9N
 
 ### 4.1 模型训练
 
+1.使用python指令启动(只允许单卡训练)
+
 训练文件在tools文件夹的[train.py](https://github.com/Lllllolita/CAN_Paddle/blob/master/tools/train.py)，由于代码中的路径均使用与CAN_Paddle文件夹的相对路径形式表示，因此需要先将CAN_Paddle文件夹指定为python的环境变量，设置为搜索路径的根路径。
 进入CAN_Paddle文件夹，假设文件夹的绝对路径为/home/a/CAN_Paddle
 ```
@@ -186,7 +188,17 @@ export PYTHONPATH=$PYTHONPATH:/home/a/CAN_Paddle
 ```
 python tools/train.py --dataset CROHME
 ```
-若训练启动成功，则会输出日志
+2.使用bash脚本启动(允许单卡、多卡训练)
+
+进入CAN_Paddle文件夹，输入单卡训练指令
+```
+bash scripts/train_single_card.sh
+```
+进入CAN_Paddle文件夹，输入多卡训练指令
+```
+bash scripts/train_multi_cards.sh
+```
+3.若训练启动成功，则会输出日志
 ```
 Loading data
 共 111 类符号。
@@ -210,6 +222,8 @@ tensorboard保存的日志.tfevents文件位于logs文件夹内。
 
 ### 4.2 模型评估
 
+1.使用python指令启动
+
 评估文件在tools文件夹的[train.py](https://github.com/Lllllolita/CAN_Paddle/blob/master/tools/train.py)，由于代码中的路径均使用与CAN_Paddle文件夹的相对路径形式表示，因此需要先将CAN_Paddle文件夹指定为python的环境变量，设置为搜索路径的根路径。
 进入CAN_Paddle文件夹，假设文件夹的绝对路径为/home/a/CAN_Paddle
 ```
@@ -219,7 +233,13 @@ export PYTHONPATH=$PYTHONPATH:/home/a/CAN_Paddle
 ```
 python tools/train.py --dataset CROHME --test-only
 ```
-若评估启动成功，则会输出日志
+2.使用bash脚本启动
+
+进入CAN_Paddle文件夹，输入评估指令
+```
+bash scripts/eval.sh
+```
+3.若评估启动成功，则会输出日志
 ```
 Loading data
 共 111 类符号。
@@ -236,6 +256,7 @@ init tensorboard
 tensorboard保存的日志.tfevents文件位于logs文件夹内。
 
 ### 4.3 模型预测
+1.使用python指令启动
 
 预测文件在tools文件夹的[predict.py](https://github.com/Lllllolita/CAN_Paddle/blob/master/tools/predict.py)，由于代码中的路径均使用与CAN_Paddle文件夹的相对路径形式表示，因此需要先将CAN_Paddle文件夹指定为python的环境变量，设置为搜索路径的根路径。
 进入CAN_Paddle文件夹，假设文件夹的绝对路径为/home/a/CAN_Paddle
@@ -266,7 +287,12 @@ python tools/predict.py --pretrained your_model_path --img_path your_img_path
 共 111 类符号。
 seq_prob: \frac { 1 } { 3 } \pi r ^ { 2 } h
 ```
+2.使用bash脚本启动(默认使用gpu)
 
+进入CAN_Paddle文件夹，输入预测指令
+```
+bash scripts/predict.sh
+```
 ### 4.4 查看训练、评估日志
 
 下载本repo提供的[tensorboard日志](https://pan.baidu.com/s/1prO4DRLq2T99cDvdSGTumQ)，提取码：p6he，或自行训练并保存日志。下载日志后，将logs文件夹放置于CAN_Paddle根目录（替换repo中的logs文件夹）。日志提供了基于torch和paddle，使用Adadelta、SGD优化器的训练、验证日志曲线。
@@ -289,12 +315,12 @@ TensorBoard 2.5.0 at http://localhost:6006/ (Press CTRL+C to quit)
 
 
 ## 5. 模型推理部署
+1.使用python指令启动
 推理文件在tools文件夹的[infer.py](https://github.com/Lllllolita/CAN_Paddle/blob/master/tools/infer.py)，由于代码中的路径均使用与CAN_Paddle文件夹的相对路径形式表示，因此需要先将CAN_Paddle文件夹指定为python的环境变量，设置为搜索路径的根路径。
 进入CAN_Paddle文件夹，假设文件夹的绝对路径为/home/a/CAN_Paddle
 ```
 export PYTHONPATH=$PYTHONPATH:/home/a/CAN_Paddle
 ```
-
 模型使用inference进行推理部署，inference模型可以通过模型准备的百度网盘的链接进行下载，下载完的模型（包括pdiparams，pdiparams.info，pdmodel文件）放在test_model文件夹里，要把inference和inference_faster文件全部下载下来，预测样例图片在test_images的test_expamples里。
 
 简单的推理命令如下：
@@ -319,7 +345,12 @@ python tools/infer.py  --img_path your_img_path --if_fast (True or False)
 共 111 类符号。
 image_name: ./images/RIT_2014_94.jpeg, result_seq: \frac { 1 } { 3 } \pi r ^ { 2 } h
 ```
+2.使用bash脚本启动(默认使用gpu)
 
+进入CAN_Paddle文件夹，输入预测指令
+```
+bash scripts/infer.sh
+```
 
 ## 6. 自动化测试脚本
 
