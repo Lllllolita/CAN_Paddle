@@ -179,8 +179,8 @@ inference模型：您可以在[百度网盘](https://pan.baidu.com/s/1Jjfw7cSz9N
 
 1.使用python指令启动(只允许单卡训练)
 
-训练文件在tools文件夹的[train.py](https://github.com/Lllllolita/CAN_Paddle/blob/master/tools/train.py)，由于代码中的路径均使用与CAN_Paddle文件夹的相对路径形式表示，因此需要先将CAN_Paddle文件夹指定为python的环境变量，设置为搜索路径的根路径。
-进入CAN_Paddle文件夹，假设文件夹的绝对路径为/home/a/CAN_Paddle
+训练文件在`tools`文件夹的[train.py](https://github.com/Lllllolita/CAN_Paddle/blob/master/tools/train.py)，由于代码中的路径均使用与CAN_Paddle文件夹的相对路径形式表示，因此需要先将CAN_Paddle文件夹指定为python的环境变量，设置为搜索路径的根路径。
+进入`CAN_Paddle`文件夹，假设文件夹的绝对路径为`/home/a/CAN_Paddle`
 ```
 export PYTHONPATH=$PYTHONPATH:/home/a/CAN_Paddle
 ```
@@ -190,11 +190,11 @@ python tools/train.py --dataset CROHME
 ```
 2.使用bash脚本启动(允许单卡、多卡训练)
 
-进入CAN_Paddle文件夹，输入单卡训练指令
+进入`CAN_Paddle`文件夹，输入单卡训练指令
 ```
 bash scripts/train_single_card.sh
 ```
-进入CAN_Paddle文件夹，输入多卡训练指令
+进入`CAN_Paddle`文件夹，输入多卡训练指令
 ```
 bash scripts/train_multi_cards.sh
 ```
@@ -213,19 +213,19 @@ Start training
 [Epoch 1, iter: 2] wordRate: 0.05784, expRate: 0.00000, lr: 0.00002, loss: 1293.39844, avg_reader_cost: 0.00120 sec, avg_batch_cost: 0.69045 sec, avg_samples: 8.0, avg_ips: 11.58666 images/sec.
 [Epoch 1, iter: 3] wordRate: 0.04320, expRate: 0.00000, lr: 0.00003, loss: 500.51590, avg_reader_cost: 0.00118 sec, avg_batch_cost: 0.85754 sec, avg_samples: 8.0, avg_ips: 9.32896 images/sec.
 ```
-超参数设置于config.yaml，包括初始学习率、批大小、学习率调参相关设置等。
+超参数设置于[`config.yaml`](https://github.com/Lllllolita/CAN_Paddle/blob/master/config.yaml)，包括初始学习率、批大小、学习率调参相关设置等。
 
-训练保存的模型.pdparams文件位于checkpoints文件夹内，默认设置为只保存当前最优模型。
+训练保存的模型`.pdparams`文件位于`checkpoints`文件夹内，默认设置为只保存当前最优模型。
 
-tensorboard保存的日志.tfevents文件位于logs文件夹内。
+tensorboard保存的日志`.tfevents`文件位于`logs`文件夹内。
 
 
 ### 4.2 模型评估
 
 1.使用python指令启动
 
-评估文件在tools文件夹的[train.py](https://github.com/Lllllolita/CAN_Paddle/blob/master/tools/train.py)，由于代码中的路径均使用与CAN_Paddle文件夹的相对路径形式表示，因此需要先将CAN_Paddle文件夹指定为python的环境变量，设置为搜索路径的根路径。
-进入CAN_Paddle文件夹，假设文件夹的绝对路径为/home/a/CAN_Paddle
+评估文件在`tools`文件夹的[`train.py`](https://github.com/Lllllolita/CAN_Paddle/blob/master/tools/train.py)，由于代码中的路径均使用与CAN_Paddle文件夹的相对路径形式表示，因此需要先将CAN_Paddle文件夹指定为python的环境变量，设置为搜索路径的根路径。
+进入`CAN_Paddle`文件夹，假设文件夹的绝对路径为`/home/a/CAN_Paddle`
 ```
 export PYTHONPATH=$PYTHONPATH:/home/a/CAN_Paddle
 ```
@@ -235,7 +235,7 @@ python tools/train.py --dataset CROHME --test-only
 ```
 2.使用bash脚本启动
 
-进入CAN_Paddle文件夹，输入评估指令
+进入`CAN_Paddle`文件夹，输入评估指令
 ```
 bash scripts/eval.sh
 ```
@@ -253,13 +253,13 @@ init tensorboard
 [Epoch 1, iter: 2] wordRate: 0.85185, expRate: 0.00000, word_loss: 0.31574, counting_loss: 0.01928
 [Epoch 1, iter: 3] wordRate: 0.80723, expRate: 0.00000, word_loss: 1.06320, counting_loss: 0.32089
 ```
-tensorboard保存的日志.tfevents文件位于logs文件夹内。
+tensorboard保存的日志`.tfevents`文件位于`logs`文件夹内。
 
 ### 4.3 模型预测
 1.使用python指令启动
 
-预测文件在tools文件夹的[predict.py](https://github.com/Lllllolita/CAN_Paddle/blob/master/tools/predict.py)，由于代码中的路径均使用与CAN_Paddle文件夹的相对路径形式表示，因此需要先将CAN_Paddle文件夹指定为python的环境变量，设置为搜索路径的根路径。
-进入CAN_Paddle文件夹，假设文件夹的绝对路径为/home/a/CAN_Paddle
+预测文件在`tools`文件夹的[`predict.py`](https://github.com/Lllllolita/CAN_Paddle/blob/master/tools/predict.py)，由于代码中的路径均使用与CAN_Paddle文件夹的相对路径形式表示，因此需要先将CAN_Paddle文件夹指定为python的环境变量，设置为搜索路径的根路径。
+进入`CAN_Paddle`文件夹，假设文件夹的绝对路径为`/home/a/CAN_Paddle`
 ```
 export PYTHONPATH=$PYTHONPATH:/home/a/CAN_Paddle
 ```
@@ -289,14 +289,14 @@ seq_prob: \frac { 1 } { 3 } \pi r ^ { 2 } h
 ```
 2.使用bash脚本启动(默认使用gpu)
 
-进入CAN_Paddle文件夹，输入预测指令
+进入`CAN_Paddle`文件夹，输入预测指令
 ```
 bash scripts/predict.sh
 ```
 ### 4.4 查看训练、评估日志
 
 下载本repo提供的[tensorboard日志](https://pan.baidu.com/s/1prO4DRLq2T99cDvdSGTumQ)，提取码：p6he，或自行训练并保存日志。下载日志后，将logs文件夹放置于CAN_Paddle根目录（替换repo中的logs文件夹）。日志提供了基于torch和paddle，使用Adadelta、SGD优化器的训练、验证日志曲线。
-进入logs文件夹，假设文件夹的绝对路径为/home/a/CAN_Paddle/logs
+进入`logs`文件夹，假设文件夹的绝对路径为`/home/a/CAN_Paddle/logs`
 ```
 tensorboard --logdir=/home/a/CAN_Paddle/logs --port=6006
 ```
@@ -311,13 +311,13 @@ NOTE: Using experimental fast data loading logic. To disable, pass
 Serving TensorBoard on localhost; to expose to the network, use a proxy or pass --bind_all
 TensorBoard 2.5.0 at http://localhost:6006/ (Press CTRL+C to quit)
 ```
-启动成功后，在浏览器输入：http://localhost:6006/ 即可进入tensorboard。
+启动成功后，在浏览器输入：`http://localhost:6006/` 即可进入tensorboard。
 
 
 ## 5. 模型推理部署
 1.使用python指令启动
-推理文件在tools文件夹的[infer.py](https://github.com/Lllllolita/CAN_Paddle/blob/master/tools/infer.py)，由于代码中的路径均使用与CAN_Paddle文件夹的相对路径形式表示，因此需要先将CAN_Paddle文件夹指定为python的环境变量，设置为搜索路径的根路径。
-进入CAN_Paddle文件夹，假设文件夹的绝对路径为/home/a/CAN_Paddle
+推理文件在`tools`文件夹的[infer.py](https://github.com/Lllllolita/CAN_Paddle/blob/master/tools/infer.py)，由于代码中的路径均使用与CAN_Paddle文件夹的相对路径形式表示，因此需要先将CAN_Paddle文件夹指定为python的环境变量，设置为搜索路径的根路径。
+进入`CAN_Paddle`文件夹，假设文件夹的绝对路径为`/home/a/CAN_Paddle`
 ```
 export PYTHONPATH=$PYTHONPATH:/home/a/CAN_Paddle
 ```
@@ -354,7 +354,7 @@ bash scripts/infer.sh
 
 ## 6. 自动化测试脚本
 
-介绍下tipc的基本使用以及使用链接
+关于自动化测试脚本的使用信息可查看[TIPC使用文档](test_tipc/README.md)。
 
 
 ## 7. LICENSE

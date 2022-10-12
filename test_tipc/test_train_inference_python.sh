@@ -372,7 +372,6 @@ else
                     else
                         infer_model_dir=${save_infer_path}
                     fi
-                    echo ${inference_dir}
                     func_inference "${python}" "${inference_py}" "${infer_model_dir}" "${LOG_PATH}" "${train_infer_img_dir}" "${flag_quant}"
                     
                     eval "unset CUDA_VISIBLE_DEVICES"

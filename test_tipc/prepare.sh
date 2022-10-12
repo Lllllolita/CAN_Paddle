@@ -21,29 +21,29 @@ trainer_list=$(func_parser_value "${lines[12]}")
 pip install -r requirements.txt
 if [ ${MODE} = "lite_train_lite_infer" ];then
     # prepare lite data
-    tar -xf ./test_images/lite_data.tar
-    ln -s ./lite_data/ ./data
+#    tar -xf ./test_images/lite_data.tar
+#    ln -s ./lite_data/ ./data
     if [[ ${model_name} == "can" ]];then
-        wget -nc -P  ./pretrain_models/ https://paddle-model-ecology.bj.bcebos.com/model/mobilenetv3_reprod/mobilenet_v3_small_pretrained.pdparams  --no-check-certificate
+        wget -nc -P  ./   --no-check-certificate
     fi
 
 elif [ ${MODE} = "whole_train_whole_infer" ];then
     tar -xf ../test_images/lite_data.tar
     # prepare whole data
     if [[ ${model_name} == "can" ]];then
-        wget -nc -P  ./pretrain_models/ https://paddle-model-ecology.bj.bcebos.com/model/mobilenetv3_reprod/mobilenet_v3_small_pretrained.pdparams  --no-check-certificate
+        wget -nc -P ./ https://paddle-model-ecology.bj.bcebos.com/model/mobilenetv3_reprod/mobilenet_v3_small_pretrained.pdparams  --no-check-certificate
     fi
     
 elif [ ${MODE} = "lite_train_whole_infer" ];then
     tar -xf ../test_images/lite_data.tar
     if [[ ${model_name} == "can" ]];then
-        wget -nc -P  ./pretrain_models/ https://paddle-model-ecology.bj.bcebos.com/model/mobilenetv3_reprod/mobilenet_v3_small_pretrained.pdparams  --no-check-certificate
+        wget -nc -P  ./ https://paddle-model-ecology.bj.bcebos.com/model/mobilenetv3_reprod/mobilenet_v3_small_pretrained.pdparams  --no-check-certificate
     fi
 
 elif [ ${MODE} = "whole_infer" ];then
     tar -xf ../test_images/lite_data.tar
     if [[ ${model_name} == "can" ]];then
-        wget -nc -P  ./pretrain_models/ https://paddle-model-ecology.bj.bcebos.com/model/mobilenetv3_reprod/mobilenet_v3_small_pretrained.pdparams  --no-check-certificate
+        wget -nc -P  ./ https://paddle-model-ecology.bj.bcebos.com/model/mobilenetv3_reprod/mobilenet_v3_small_pretrained.pdparams  --no-check-certificate
     fi
 
 #elif [ ${MODE} = "serving_infer" ];then

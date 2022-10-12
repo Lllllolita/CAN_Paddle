@@ -19,11 +19,9 @@
 - 模型压缩：包括裁剪、离线/在线量化、蒸馏。
 - 其他预测部署：包括Paddle Inference C++预测、Paddle Serving部署、Paddle-Lite部署等。
 
-更详细的mkldnn、Tensorrt等预测加速相关功能的支持情况可以查看各测试工具的[更多教程](#more)。
-
 | 算法论文 | 模型名称 | 模型类型 | 基础训练预测 | 更多训练方式 | 模型压缩 |  其他预测部署  |
 | :--- | :--- |  :----:  | :--------: |  :----  |   :----  |   :----  |
-| CAN     | can      | OCR     | -           | -           | - | - |
+| CAN     | can      | OCR     | 支持           | -           | - | - |
 
 
 ## 3. 测试工具简介
@@ -32,14 +30,14 @@
 ```
 test_tipc
     |--configs                              # 配置目录
-    |    |--CAN_DWAP                        # 您的模型名称
+    |    |--can                             # 模型名称
     |           |--train_infer_python.txt   # 基础训练推理测试配置文件
     |--docs                                 # 文档目录
     |   |--test_train_inference_python.md   # 基础训练推理测试说明文档
     |----README.md                          # TIPC说明文档
     |----prepare.sh                         # TIPC基础训练推理测试数据准备脚本
-    |----test_train_inference_python.sh     # TIPC基础训练推理测试解析脚本，无需改动
-    |----common_func.sh                     # TIPC基础训练推理测试常用函数，无需改动
+    |----test_train_inference_python.sh     # TIPC基础训练推理测试解析脚本
+    |----common_func.sh                     # TIPC基础训练推理测试常用函数
 ```
 
 ### 3.2 测试流程概述
@@ -47,7 +45,6 @@ test_tipc
 
 1. 运行prepare.sh准备测试所需数据和模型；
 2. 运行要测试的功能对应的测试脚本`test_*.sh`，产出log，由log可以看到不同配置是否运行成功；
-3. 用`compare_results.py`对比log中的预测结果和预存在results目录下的结果，判断预测精度是否符合预期（在误差范围内）。
 
 
 测试单项功能仅需两行命令，**如需测试不同模型/功能，替换配置文件即可**，命令格式如下：
@@ -71,7 +68,7 @@ bash test_tipc/prepare.sh ./test_tipc/configs/${model_name}/train_infer_python.t
 bash test_tipc/test_train_inference_python.sh ./test_tipc/configs/${model_name}/train_infer_python.txt 'lite_train_lite_infer'
 ```  
 
-关于本示例命令的更多信息可查看[基础训练预测使用文档](#more)。
+关于本示例命令的更多信息可查看[基础训练预测使用文档](docs/test_train_inference_python.md)。
 
 ### 3.3 配置文件命名规范
 
@@ -84,6 +81,7 @@ bash test_tipc/test_train_inference_python.sh ./test_tipc/configs/${model_name}/
 3. 仅预测的配置（如serving、lite等）命名格式：`model_训练硬件环境(linux_gpu/linux_dcu/…)_是否多机(fleet/normal)_是否混合精度(amp/normal)_(infer/lite/serving/js)_语言(cpp/python/java)_预测硬件环境(linux_gpu/mac/jetson/opencl_arm_gpu/...).txt`，即，与2相比，仅第一个字段从train换为model，测试时模型直接下载获取，这里的“训练硬件环境”表示所测试的模型是在哪种环境下训练得到的。
 
 **根据上述命名规范，可以直接从子目录名称和配置文件名找到需要测试的场景和功能对应的配置文件。**
+本仓库目前仅支持基础训练预测配置。
 
 
 <a name="more"></a>
