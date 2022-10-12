@@ -16,9 +16,9 @@ from eval import train, evaluate
 
 parser = argparse.ArgumentParser(description='model training')
 parser.add_argument('--dataset', default='CROHME', type=str, help='dataset name')
-parser.add_argument('--device', default='gpu:0', type=str, help='device')
+parser.add_argument('--config', default='config.yaml', type=str, help='config file')
+parser.add_argument('--device', default='1', type=str, help='device')
 parser.add_argument('--check', action='store_true', help='if trained')
-parser.add_argument('--dist', action='store_true', help='distributed training')
 parser.add_argument('--test-only', action='store_true', help='only evaluate')
 args = parser.parse_args()
 
@@ -27,7 +27,7 @@ if not args.dataset:
     exit(-1)
 
 if args.dataset == 'CROHME':
-    config_file = "config.yaml"
+    config_file = args.config
 
 # 加载config文件
 params = load_config(config_file)
@@ -40,13 +40,13 @@ paddle.seed(params['seed'])
 # os.environ['CUDA_VISIBLE_DEVICES'] = '0'
 
 # 设置计算设备(GPU\CPU)
-if args.dist and paddle.distributed.get_world_size() > 1:
+if args.device !='0' and paddle.distributed.get_world_size() > 1:
     print("distributed")
     paddle.distributed.init_parallel_env()
 
 try:
-    if not args.dist:
-        params['device'] = args.device
+    if args.device =='0':
+        params['device'] = 'gpu:' + args.device
         paddle.device.set_device(params['device'])
     else:
         params['device'] = paddle.device.get_device()
@@ -133,7 +133,7 @@ if not args.check:
     os.system(f'cp {config_file} {os.path.join(params["checkpoint_dir"], model.name, model.name)}.yaml')
 
 # 多卡分布式训练
-if args.dist and paddle.distributed.get_world_size() > 1:
+if args.device !='0' and paddle.distributed.get_world_size() > 1:
     model = paddle.DataParallel(model)
 
 # 进入评估模式

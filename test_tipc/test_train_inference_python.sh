@@ -1,5 +1,8 @@
 #!/bin/bash
 source test_tipc/common_func.sh
+CAN_DIR=$(cd $(dirname $0);cd ..; pwd)
+echo $CAN_DIR
+export PYTHONPATH=$PYTHONPATH:$CAN_DIR
 
 FILENAME=$1
 # MODE be one of ['lite_train_lite_infer' 'lite_train_whole_infer' 'whole_train_whole_infer', 'whole_infer', 'klquant_whole_infer']
@@ -277,7 +280,7 @@ else
                 set_amp_config="Global.use_amp=True Global.scale_loss=1024.0 Global.use_dynamic_loss_scaling=True"
             else
                 set_amp_config=" "
-            fi          
+            fi
             for trainer in ${trainer_list[*]}; do 
                 flag_quant=False
                 if [ ${trainer} = ${pact_key} ]; then
@@ -369,6 +372,7 @@ else
                     else
                         infer_model_dir=${save_infer_path}
                     fi
+                    echo ${inference_dir}
                     func_inference "${python}" "${inference_py}" "${infer_model_dir}" "${LOG_PATH}" "${train_infer_img_dir}" "${flag_quant}"
                     
                     eval "unset CUDA_VISIBLE_DEVICES"

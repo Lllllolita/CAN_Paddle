@@ -143,6 +143,8 @@ def get_args(add_help=True):
     parser.add_argument(
         "--use_gpu", default=False, type=str2bool, help="use_gpu")
     parser.add_argument(
+        "--enable_mkldnn", default=False, type=str2bool, help="enable_mkldnn")
+    parser.add_argument(
         "--max_batch_size", default=16, type=int, help="max_batch_size")
     parser.add_argument("--batch_size", default=1, type=int, help="batch_size")
 

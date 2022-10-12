@@ -1,0 +1,94 @@
+# 实验名称
+experiment: "CAN"
+
+# 随机种子
+seed: 20211024
+
+# 训练参数
+epochs: 2
+batch_size: 8
+workers: 0
+train_parts: 1
+valid_parts: 1
+valid_start: 0
+save_start: 0
+
+#optimizer: Adadelta
+#optimizer: AdamW
+optimizer: SGD
+#optimizer: Adam
+lr: 0.01
+lr_decay: cosine
+step_ratio: 10
+step_decay: 5
+eps: 1e-6
+#eps:  1e-10
+weight_decay: 1e-4
+beta: 0.9
+
+dropout: True
+dropout_ratio: 0.5
+relu: True
+gradient: 100
+gradient_clip: True
+use_label_mask: False
+
+outdir: 'outdir'
+
+# 训练数据
+train_image_path: 'test_images/lite_data/lite_images.pkl'
+train_label_path: 'test_images/lite_data/lite_labels.txt'
+
+eval_image_path: 'test_images/test_data/lite_test_images.pkl'
+eval_label_path: 'test_images/test_data/lite_test_labels.txt'
+
+word_path: 'test_images/lite_data/words_dict.txt'
+#train_image_path: 'paddlevision/datasets/CROHME/train_images.pkl'
+#train_label_path: 'paddlevision/datasets/CROHME/train_labels.txt'
+#
+#eval_image_path: 'paddlevision/datasets/CROHME/14_test_images.pkl'
+#eval_label_path: 'paddlevision/datasets/CROHME/14_test_labels.txt'
+#
+#word_path: 'paddlevision/datasets/CROHME/words_dict.txt'
+
+# collate_fn
+collate_fn: collate_fn
+word_num : 111
+
+densenet:
+  ratio: 16
+  growthRate: 24
+  reduction: 0.5
+  bottleneck: True
+  use_dropout: True
+
+encoder:
+  input_channel: 1
+  out_channel: 684
+
+decoder:
+  net: AttDecoder
+  cell: 'GRU'
+  input_size: 256
+  hidden_size: 256
+  
+
+counting_decoder:
+  in_channel: 684
+  out_channel: 111
+
+attention:
+  attention_dim: 512
+  word_conv_kernel: 1
+
+attention_map_vis_path: 'vis/attention_map'
+counting_map_vis_path: 'vis/counting_map'
+
+whiten_type: None
+max_step: 256
+
+optimizer_save: False
+finetune: False
+checkpoint_dir: 'checkpoints'
+checkpoint: "CAN_2022-09-12-21-24_decoder-AttDecoder_WordRate-0.9166_ExpRate-0.5172_201"
+log_dir: 'logs'

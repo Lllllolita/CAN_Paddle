@@ -53,4 +53,4 @@ class CAN(nn.Layer):
 
         word_probs, word_alphas = self.decoder(cnn_features, labels, counting_preds, images_mask, labels_mask, is_train=is_train)
         
-        return word_probs, counting_preds,counting_preds1,counting_preds2
+        return word_probs, counting_preds, counting_preds1, counting_preds2
