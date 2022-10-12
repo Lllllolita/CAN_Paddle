@@ -110,7 +110,7 @@ class AttDecoder(nn.Layer):
         i = 0
         if self.params['if_fast']==True:
             print('faster_model')
-            index_end=96
+            index_end=36
         else:
             index_end=48
         #padding_ele=paddle.to_tensor(112,dtype="int64")

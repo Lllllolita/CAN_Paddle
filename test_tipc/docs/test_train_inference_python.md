@@ -31,12 +31,12 @@ test_image
     |--test_example                         # 推理使用图片
     |----words_dict.txt                     # 训练、验证、推理所需词表
 ```
-下载用于基础训练推理测试的模型，包括用于验证的预训练模型和用于推理的模型。
+下载用于基础训练推理测试的模型。
 
 ```shell
 bash test_tipc/prepare.sh ./test_tipc/configs/can/train_infer_python.txt 'lite_train_lite_infer'
 ```
-用于验证的预训练模型会自动放置在`CAN_Paddle`根目录中，用于推理的模型会自动放置在`/test_model`文件夹内。
+模型会自动放置在`CAN_Paddle`根目录中.
 ### 2.2 准备环境
 
 

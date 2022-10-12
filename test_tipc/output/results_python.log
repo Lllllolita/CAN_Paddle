@@ -8,3 +8,33 @@
 [33m Run successfully with command - python tools/export.py    !  [0m
 [33m Run successfully with command - python tools/infer.py --use_gpu=True                 > ./test_tipc/output/python_infer_gpu_usetrt_null_precision_null_batchsize_null.log 2>&1 !  [0m
 [33m Run successfully with command - python tools/infer.py --use_gpu=False --enable_mkldnn=False                 > ./test_tipc/output/python_infer_cpu_usemkldnn_False_threads_6_precision_null_batchsize_null.log 2>&1 !  [0m
+[33m Run successfully with command - python tools/train.py --config config_for_tipc.yaml                  !  [0m
+[33m Run successfully with command - python tools/train.py --test-only --config config_for_tipc.yaml      !  [0m
+[33m Run successfully with command - python tools/export.py    !  [0m
+[33m Run failed with command - python tools/infer.py --use_gpu=True                 > ./test_tipc/output/python_infer_gpu_usetrt_null_precision_null_batchsize_null.log 2>&1 !  [0m
+[33m Run failed with command - python tools/infer.py --use_gpu=False --enable_mkldnn=False                 > ./test_tipc/output/python_infer_cpu_usemkldnn_False_threads_6_precision_null_batchsize_null.log 2>&1 !  [0m
+[33m Run successfully with command - python -m paddle.distributed.launch --gpus=0,1 tools/train.py --config config_for_tipc.yaml                !  [0m
+[33m Run successfully with command - python tools/train.py --test-only --config config_for_tipc.yaml      !  [0m
+[33m Run successfully with command - python tools/export.py    !  [0m
+[33m Run failed with command - python tools/infer.py --use_gpu=True                 > ./test_tipc/output/python_infer_gpu_usetrt_null_precision_null_batchsize_null.log 2>&1 !  [0m
+[33m Run failed with command - python tools/infer.py --use_gpu=False --enable_mkldnn=False                 > ./test_tipc/output/python_infer_cpu_usemkldnn_False_threads_6_precision_null_batchsize_null.log 2>&1 !  [0m
+[33m Run successfully with command - python tools/train.py --config config_for_tipc.yaml                  !  [0m
+[33m Run successfully with command - python tools/train.py --test-only --config config_for_tipc.yaml      !  [0m
+[33m Run successfully with command - python tools/export.py    !  [0m
+[33m Run successfully with command - python tools/infer.py --use_gpu=True                 > ./test_tipc/output/python_infer_gpu_usetrt_null_precision_null_batchsize_null.log 2>&1 !  [0m
+[33m Run successfully with command - python tools/infer.py --use_gpu=False --enable_mkldnn=False                 > ./test_tipc/output/python_infer_cpu_usemkldnn_False_threads_6_precision_null_batchsize_null.log 2>&1 !  [0m
+[33m Run successfully with command - python -m paddle.distributed.launch --gpus=0,1 tools/train.py --config config_for_tipc.yaml                !  [0m
+[33m Run successfully with command - python tools/train.py --test-only --config config_for_tipc.yaml      !  [0m
+[33m Run successfully with command - python tools/export.py    !  [0m
+[33m Run successfully with command - python tools/infer.py --use_gpu=True                 > ./test_tipc/output/python_infer_gpu_usetrt_null_precision_null_batchsize_null.log 2>&1 !  [0m
+[33m Run successfully with command - python tools/infer.py --use_gpu=False --enable_mkldnn=False                 > ./test_tipc/output/python_infer_cpu_usemkldnn_False_threads_6_precision_null_batchsize_null.log 2>&1 !  [0m
+[33m Run successfully with command - python tools/train.py --config config_for_tipc.yaml                  !  [0m
+[33m Run successfully with command - python tools/train.py --test-only --config config_for_tipc.yaml      !  [0m
+[33m Run successfully with command - python tools/export.py    !  [0m
+[33m Run successfully with command - python tools/infer.py --use_gpu=True                 > ./test_tipc/output/python_infer_gpu_usetrt_null_precision_null_batchsize_null.log 2>&1 !  [0m
+[33m Run successfully with command - python tools/infer.py --use_gpu=False --enable_mkldnn=False                 > ./test_tipc/output/python_infer_cpu_usemkldnn_False_threads_6_precision_null_batchsize_null.log 2>&1 !  [0m
+[33m Run successfully with command - python -m paddle.distributed.launch --gpus=0,1 tools/train.py --config config_for_tipc.yaml                !  [0m
+[33m Run successfully with command - python tools/train.py --test-only --config config_for_tipc.yaml      !  [0m
+[33m Run successfully with command - python tools/export.py    !  [0m
+[33m Run successfully with command - python tools/infer.py --use_gpu=True                 > ./test_tipc/output/python_infer_gpu_usetrt_null_precision_null_batchsize_null.log 2>&1 !  [0m
+[33m Run successfully with command - python tools/infer.py --use_gpu=False --enable_mkldnn=False                 > ./test_tipc/output/python_infer_cpu_usemkldnn_False_threads_6_precision_null_batchsize_null.log 2>&1 !  [0m

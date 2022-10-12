@@ -90,5 +90,5 @@ max_step: 256
 optimizer_save: False
 finetune: False
 checkpoint_dir: 'checkpoints'
-checkpoint: "CAN_2022-09-12-21-24_decoder-AttDecoder_WordRate-0.9166_ExpRate-0.5172_201"
+checkpoint: "CAN"
 log_dir: 'logs'

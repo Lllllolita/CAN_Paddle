@@ -25,7 +25,7 @@ def get_args(add_help=True):
     parser.add_argument('--img_size', default=None, help='image size to export')
     parser.add_argument(
         '--save-inference-dir', default='./test_model', help='path where to save')
-    parser.add_argument('--pretrained', default='./test_model/predict.pdparams', help='pretrained model')
+    parser.add_argument('--pretrained', default='./CAN.pdparams', help='pretrained model')
     parser.add_argument('--config_file', default='./config.yaml', help='config_file')
     parser.add_argument('--if_fast', default=True, help='if_fast')
     args = parser.parse_args()
@@ -47,7 +47,10 @@ def export(args):
             InputSpec(
                 shape=[1, 1, args.img_size, args.img_size], dtype='float32')
         ])
-    paddle.jit.save(model, os.path.join(args.save_inference_dir, "inference"))
+    if args.if_fast:
+        paddle.jit.save(model, os.path.join(args.save_inference_dir, "inference_faster"))
+    else:
+        paddle.jit.save(model, os.path.join(args.save_inference_dir, "inference"))
     print(f"inference model has been saved into {args.save_inference_dir}")
 
 
