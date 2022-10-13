@@ -24,14 +24,14 @@ class Attention(nn.Layer):
         # self.attention_conv = nn.Conv2D(1, 512, kernel_size=11, padding=5, weight_attr = w_attr_2, bias_attr=False)
 
         # 使用Xavier初始化
-        self.attention_conv = nn.Conv2D(1, 512, kernel_size=11, padding=5)
+        self.attention_conv = nn.Conv2D(1, 512, kernel_size=11, padding=5, bias_attr=False)
 
         # 使用kaiming初始化
         # w_attr_3, b_attr_3 = self._init_weights()
         # self.attention_weight = nn.Linear(512, self.attention_dim, weight_attr = w_attr_3, bias_attr=False)
 
         # 使用Xavier初始化
-        self.attention_weight = nn.Linear(512, self.attention_dim)
+        self.attention_weight = nn.Linear(512, self.attention_dim, bias_attr=False)
 
         # 使用kaiming初始化
         # w_attr_4, b_attr_4 = self._init_weights()

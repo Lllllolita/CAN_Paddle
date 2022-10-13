@@ -149,11 +149,7 @@ class AttDecoder(nn.Layer):
     
             word_probs[i]=word.numpy()[0]
             i+=1
-        
-        
-              
-            
-            
+
         return word_probs
         # return word_probs, word_alphas
 
